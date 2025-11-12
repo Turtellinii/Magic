@@ -1,0 +1,166 @@
+.game-board {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #1a472a 0%, #2d5a3d 100%);
+  padding: 20px;
+  color: white;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.game-header h1 {
+  margin: 0;
+  color: #f0e6d2;
+  font-family: 'Georgia', serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.card-finder-btn {
+  background: #8b6914;
+  color: white;
+  border: 2px solid #f0e6d2;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.card-finder-btn:hover {
+  background: #a67c1a;
+  transform: scale(1.05);
+}
+
+.player-section {
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid #8b6914;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.player-section h2 {
+  margin: 0 0 15px 0;
+  color: #f0e6d2;
+  font-size: 24px;
+  text-align: center;
+}
+
+.opponent-section {
+  border-color: #c43a3a;
+}
+
+.player-section-main {
+  border-color: #4a90e2;
+}
+
+.zone {
+  margin-bottom: 15px;
+}
+
+.zone h3 {
+  margin: 0 0 10px 0;
+  color: #f0e6d2;
+  font-size: 18px;
+}
+
+.card-container {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  min-height: 100px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.zone-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.zone-controls button {
+  background: #2d5a3d;
+  color: white;
+  border: 2px solid #8b6914;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.zone-controls button:hover {
+  background: #3a6d4d;
+  transform: translateY(-2px);
+}
+
+.deck-info {
+  color: #f0e6d2;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #2d5a3d 0%, #1a472a 100%);
+  border: 3px solid #8b6914;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.modal-content h3 {
+  margin: 0 0 20px 0;
+  color: #f0e6d2;
+  font-size: 24px;
+  text-align: center;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.modal-content button {
+  background: #8b6914;
+  color: white;
+  border: 2px solid #f0e6d2;
+  padding: 10px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+.modal-content button:hover {
+  background: #a67c1a;
+}

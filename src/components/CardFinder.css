@@ -1,0 +1,143 @@
+.card-finder {
+  background: rgba(0, 0, 0, 0.4);
+  border: 3px solid #8b6914;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card-finder h3 {
+  margin: 0 0 15px 0;
+  color: #f0e6d2;
+  font-size: 22px;
+  text-align: center;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #8b6914;
+  border-radius: 8px;
+  background: #f5e6d3;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #a67c1a;
+  box-shadow: 0 0 8px rgba(139, 105, 20, 0.5);
+}
+
+.finder-content {
+  display: flex;
+  gap: 20px;
+}
+
+.card-list {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.card-list-item {
+  background: rgba(245, 230, 211, 0.9);
+  border: 2px solid #8b6914;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.card-list-item:hover {
+  background: rgba(245, 230, 211, 1);
+  transform: translateX(5px);
+}
+
+.card-list-item.selected {
+  background: #8b6914;
+  color: white;
+}
+
+.card-list-item strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.card-type-small {
+  font-size: 11px;
+  font-style: italic;
+  color: #4a3320;
+}
+
+.card-list-item.selected .card-type-small {
+  color: #f0e6d2;
+}
+
+.card-preview {
+  flex: 0 0 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.preview-placeholder {
+  width: 200px;
+  height: 280px;
+  border: 2px dashed #8b6914;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b6914;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.add-btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.player-btn {
+  background: #4a90e2;
+  color: white;
+  border-color: #357abd;
+}
+
+.player-btn:hover {
+  background: #357abd;
+  transform: scale(1.05);
+}
+
+.opponent-btn {
+  background: #c43a3a;
+  color: white;
+  border-color: #a02f2f;
+}
+
+.opponent-btn:hover {
+  background: #a02f2f;
+  transform: scale(1.05);
+}
