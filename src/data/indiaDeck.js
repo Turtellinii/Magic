@@ -591,5 +591,295 @@ export const indiaDeck = [
     effect2: "Tap, Pay 2: Gain 2 life. If a Spirit or Beast entered the battlefield this turn, gain 3 life instead.",
     effect3: "Tap, Sacrifice Pushkar Lake: Return target enchantment or blessing from your graveyard to your hand.",
     flavor: "It remembers every prayer, whispered or wept."
+  },
+  {
+    id: "somnath-1",
+    name: "Somnath, Temple of Cycles",
+    type: "Legendary Land — Ruined Sanctum",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "At the beginning of your end step, if a creature you control died this turn, you may Scry 2.",
+    effect3: "Tap, Pay 3, Sacrifice Somnath: Exile up to two cards from an opponent's graveyard. Gain life equal to their combined mana cost.",
+    flavor: "Shattered and raised again — like the soul beyond time."
+  },
+  {
+    id: "somnath-2",
+    name: "Somnath, Temple of Cycles",
+    type: "Legendary Land — Ruined Sanctum",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "At the beginning of your end step, if a creature you control died this turn, you may Scry 2.",
+    effect3: "Tap, Pay 3, Sacrifice Somnath: Exile up to two cards from an opponent's graveyard. Gain life equal to their combined mana cost.",
+    flavor: "Shattered and raised again — like the soul beyond time."
+  },
+  {
+    id: "bodh-gaya-1",
+    name: "Bodh Gaya, Seat of Awakening",
+    type: "Legendary Land — Enlightenment Site",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "If you control a Monk or Sage, you may Scry 1 at the beginning of your upkeep.",
+    effect3: "Tap, Pay 3: Until end of turn, target creature gains \"Whenever this creature deals combat damage, draw a card.\"",
+    flavor: "One night beneath its stillness changed the course of all thought."
+  },
+  {
+    id: "bodh-gaya-2",
+    name: "Bodh Gaya, Seat of Awakening",
+    type: "Legendary Land — Enlightenment Site",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "If you control a Monk or Sage, you may Scry 1 at the beginning of your upkeep.",
+    effect3: "Tap, Pay 3: Until end of turn, target creature gains \"Whenever this creature deals combat damage, draw a card.\"",
+    flavor: "One night beneath its stillness changed the course of all thought."
+  },
+  {
+    id: "shakti-peethas-1",
+    name: "Shakti Peethas",
+    type: "Land — Sacred Sites",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Choose one — target creature gains Trample, Vigilance, or Ward 1 until end of turn.",
+    effect3: "If you control a Goddess, activate this ability without paying its cost once per turn.",
+    flavor: "Scattered across the land, her essence empowers the faithful."
+  },
+  {
+    id: "shakti-peethas-2",
+    name: "Shakti Peethas",
+    type: "Land — Sacred Sites",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Choose one — target creature gains Trample, Vigilance, or Ward 1 until end of turn.",
+    effect3: "If you control a Goddess, activate this ability without paying its cost once per turn.",
+    flavor: "Scattered across the land, her essence empowers the faithful."
+  },
+  {
+    id: "shakti-peethas-3",
+    name: "Shakti Peethas",
+    type: "Land — Sacred Sites",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Choose one — target creature gains Trample, Vigilance, or Ward 1 until end of turn.",
+    effect3: "If you control a Goddess, activate this ability without paying its cost once per turn.",
+    flavor: "Scattered across the land, her essence empowers the faithful."
+  },
+  {
+    id: "tawang-1",
+    name: "Tawang Monastery",
+    type: "Land — Mountain Sanctuary",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Creatures you control with the Monk, Sage, or Bard subtype cost 1 less to cast.",
+    effect3: "Tap, Pay 1: Gain 1 life for each Monk you control.",
+    flavor: "A citadel of peace where even clouds kneel."
+  },
+  {
+    id: "tawang-2",
+    name: "Tawang Monastery",
+    type: "Land — Mountain Sanctuary",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Creatures you control with the Monk, Sage, or Bard subtype cost 1 less to cast.",
+    effect3: "Tap, Pay 1: Gain 1 life for each Monk you control.",
+    flavor: "A citadel of peace where even clouds kneel."
+  },
+  {
+    id: "tawang-3",
+    name: "Tawang Monastery",
+    type: "Land — Mountain Sanctuary",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Creatures you control with the Monk, Sage, or Bard subtype cost 1 less to cast.",
+    effect3: "Tap, Pay 1: Gain 1 life for each Monk you control.",
+    flavor: "A citadel of peace where even clouds kneel."
+  },
+  {
+    id: "kanchipuram-1",
+    name: "Kanchipuram, City of a Thousand Temples",
+    type: "Land — Eternal City",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Whenever you cast an Enchantment, gain 1 life.",
+    effect3: "Tap, Pay 2: Return target Enchantment from your graveyard to your hand.",
+    flavor: "Each spire chants its own hymn — together, they form a cosmic choir."
+  },
+  {
+    id: "kanchipuram-2",
+    name: "Kanchipuram, City of a Thousand Temples",
+    type: "Land — Eternal City",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Whenever you cast an Enchantment, gain 1 life.",
+    effect3: "Tap, Pay 2: Return target Enchantment from your graveyard to your hand.",
+    flavor: "Each spire chants its own hymn — together, they form a cosmic choir."
+  },
+  {
+    id: "kanchipuram-3",
+    name: "Kanchipuram, City of a Thousand Temples",
+    type: "Land — Eternal City",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Whenever you cast an Enchantment, gain 1 life.",
+    effect3: "Tap, Pay 2: Return target Enchantment from your graveyard to your hand.",
+    flavor: "Each spire chants its own hymn — together, they form a cosmic choir."
+  },
+  {
+    id: "valley-of-flowers-1",
+    name: "Valley of Flowers",
+    type: "Land — Divine Meadow",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "When a Beast or Spirit enters the battlefield under your control, you may gain 1 life and Scry 1.",
+    effect3: "Tap, Pay 1: Creatures you control get +0/+1 until end of turn.",
+    flavor: "The earth blooms here not just with color — but with memory."
+  },
+  {
+    id: "valley-of-flowers-2",
+    name: "Valley of Flowers",
+    type: "Land — Divine Meadow",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "When a Beast or Spirit enters the battlefield under your control, you may gain 1 life and Scry 1.",
+    effect3: "Tap, Pay 1: Creatures you control get +0/+1 until end of turn.",
+    flavor: "The earth blooms here not just with color — but with memory."
+  },
+  {
+    id: "valley-of-flowers-3",
+    name: "Valley of Flowers",
+    type: "Land — Divine Meadow",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "When a Beast or Spirit enters the battlefield under your control, you may gain 1 life and Scry 1.",
+    effect3: "Tap, Pay 1: Creatures you control get +0/+1 until end of turn.",
+    flavor: "The earth blooms here not just with color — but with memory."
+  },
+  {
+    id: "sarnath-1",
+    name: "Sarnath, Cradle of the Dharma",
+    type: "Legendary Land — Pilgrimage Site",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Monks, Sages, and Scholars you control gain Vigilance until end of turn.",
+    effect3: "If a Monk entered the battlefield under your control this turn, draw a card.",
+    flavor: "Here, the Wheel turned — and thought became path."
+  },
+  {
+    id: "sarnath-2",
+    name: "Sarnath, Cradle of the Dharma",
+    type: "Legendary Land — Pilgrimage Site",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Monks, Sages, and Scholars you control gain Vigilance until end of turn.",
+    effect3: "If a Monk entered the battlefield under your control this turn, draw a card.",
+    flavor: "Here, the Wheel turned — and thought became path."
+  },
+  {
+    id: "lothal-1",
+    name: "Lothal, Dock of the Ancients",
+    type: "Land — Port City",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Return an Artifact or Enchantment from your graveyard to your hand.",
+    effect3: "If you control three or more Artifacts, you may Scry 1 whenever you activate this ability.",
+    flavor: "Ships no longer sail — but the harbor still holds time."
+  },
+  {
+    id: "lothal-2",
+    name: "Lothal, Dock of the Ancients",
+    type: "Land — Port City",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Return an Artifact or Enchantment from your graveyard to your hand.",
+    effect3: "If you control three or more Artifacts, you may Scry 1 whenever you activate this ability.",
+    flavor: "Ships no longer sail — but the harbor still holds time."
+  },
+  {
+    id: "lothal-3",
+    name: "Lothal, Dock of the Ancients",
+    type: "Land — Port City",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Return an Artifact or Enchantment from your graveyard to your hand.",
+    effect3: "If you control three or more Artifacts, you may Scry 1 whenever you activate this ability.",
+    flavor: "Ships no longer sail — but the harbor still holds time."
+  },
+  {
+    id: "bhimbetka-1",
+    name: "Bhimbetka Rock Shelters",
+    type: "Land — Ancient Caves",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Creatures you control with power 2 or less cannot be blocked by creatures with power 3 or greater.",
+    effect3: "Tap, Pay 1: Until end of turn, target creature becomes a Spirit in addition to its other types.",
+    flavor: "Painted in ochre, haunted by memory."
+  },
+  {
+    id: "bhimbetka-2",
+    name: "Bhimbetka Rock Shelters",
+    type: "Land — Ancient Caves",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Creatures you control with power 2 or less cannot be blocked by creatures with power 3 or greater.",
+    effect3: "Tap, Pay 1: Until end of turn, target creature becomes a Spirit in addition to its other types.",
+    flavor: "Painted in ochre, haunted by memory."
+  },
+  {
+    id: "bhimbetka-3",
+    name: "Bhimbetka Rock Shelters",
+    type: "Land — Ancient Caves",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Creatures you control with power 2 or less cannot be blocked by creatures with power 3 or greater.",
+    effect3: "Tap, Pay 1: Until end of turn, target creature becomes a Spirit in addition to its other types.",
+    flavor: "Painted in ochre, haunted by memory."
+  },
+  {
+    id: "srirangam-1",
+    name: "Srirangam Temple",
+    type: "Land — Divine Complex",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Choose one — gain 2 life, Scry 2, or draw a card and discard a card.",
+    effect3: "If you control a Goddess or Monk, activate this ability without paying its cost once per turn.",
+    flavor: "A city within a temple — or a temple within a city."
+  },
+  {
+    id: "srirangam-2",
+    name: "Srirangam Temple",
+    type: "Land — Divine Complex",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Choose one — gain 2 life, Scry 2, or draw a card and discard a card.",
+    effect3: "If you control a Goddess or Monk, activate this ability without paying its cost once per turn.",
+    flavor: "A city within a temple — or a temple within a city."
+  },
+  {
+    id: "srirangam-3",
+    name: "Srirangam Temple",
+    type: "Land — Divine Complex",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Choose one — gain 2 life, Scry 2, or draw a card and discard a card.",
+    effect3: "If you control a Goddess or Monk, activate this ability without paying its cost once per turn.",
+    flavor: "A city within a temple — or a temple within a city."
+  },
+  {
+    id: "narmada-1",
+    name: "Narmada River",
+    type: "Legendary Land — Sacred Stream",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Sacrifice a creature: Return up to one Enchantment and one Creature from your graveyard to your hand.",
+    effect3: "If a God or Sage is on the battlefield, gain 2 life.",
+    flavor: "Older than the Ganges, her current carries echoes of genesis."
+  },
+  {
+    id: "narmada-2",
+    name: "Narmada River",
+    type: "Legendary Land — Sacred Stream",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Sacrifice a creature: Return up to one Enchantment and one Creature from your graveyard to your hand.",
+    effect3: "If a God or Sage is on the battlefield, gain 2 life.",
+    flavor: "Older than the Ganges, her current carries echoes of genesis."
   }
 ];
