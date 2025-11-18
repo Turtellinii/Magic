@@ -1123,5 +1123,296 @@ export const indiaDeck = [
     effect1: "When this enters the battlefield, all creatures you control gain Ward 2.",
     effect2: "At the beginning of your upkeep, you may gain 1 life for each enchanted creature you control.",
     flavor: "\"Rangoli, incense, and flame — drawn lines against unseen teeth.\""
+  },
+  {
+    id: "curse-ashwatthama-1",
+    name: "Curse of Ashwatthama",
+    type: "Enchantment — Curse",
+    cost: 4,
+    effect1: "Enchant creature",
+    effect2: "Enchanted creature cannot be sacrificed or exiled and cannot leave the battlefield by any means.",
+    effect3: "At the beginning of its controller's upkeep, it deals 1 damage to its controller and loses 1 toughness.",
+    flavor: "\"Denied death, cursed to bleed forever under heaven's gaze.\""
+  },
+  {
+    id: "curse-ashwatthama-2",
+    name: "Curse of Ashwatthama",
+    type: "Enchantment — Curse",
+    cost: 4,
+    effect1: "Enchant creature",
+    effect2: "Enchanted creature cannot be sacrificed or exiled and cannot leave the battlefield by any means.",
+    effect3: "At the beginning of its controller's upkeep, it deals 1 damage to its controller and loses 1 toughness.",
+    flavor: "\"Denied death, cursed to bleed forever under heaven's gaze.\""
+  },
+  {
+    id: "curse-ashwatthama-3",
+    name: "Curse of Ashwatthama",
+    type: "Enchantment — Curse",
+    cost: 4,
+    effect1: "Enchant creature",
+    effect2: "Enchanted creature cannot be sacrificed or exiled and cannot leave the battlefield by any means.",
+    effect3: "At the beginning of its controller's upkeep, it deals 1 damage to its controller and loses 1 toughness.",
+    flavor: "\"Denied death, cursed to bleed forever under heaven's gaze.\""
+  },
+  {
+    id: "illusion-maya-1",
+    name: "Illusion of Maya",
+    type: "Instant — Curse",
+    cost: 2,
+    effect1: "Target creature loses all abilities until end of turn.",
+    effect2: "If that creature is a God, Avatar, or Noble, it also becomes a 1/1 Illusion until end of turn.",
+    flavor: "\"What is real? What is role? Even the gods lose themselves in the veil.\""
+  },
+  {
+    id: "illusion-maya-2",
+    name: "Illusion of Maya",
+    type: "Instant — Curse",
+    cost: 2,
+    effect1: "Target creature loses all abilities until end of turn.",
+    effect2: "If that creature is a God, Avatar, or Noble, it also becomes a 1/1 Illusion until end of turn.",
+    flavor: "\"What is real? What is role? Even the gods lose themselves in the veil.\""
+  },
+  {
+    id: "illusion-maya-3",
+    name: "Illusion of Maya",
+    type: "Instant — Curse",
+    cost: 2,
+    effect1: "Target creature loses all abilities until end of turn.",
+    effect2: "If that creature is a God, Avatar, or Noble, it also becomes a 1/1 Illusion until end of turn.",
+    flavor: "\"What is real? What is role? Even the gods lose themselves in the veil.\""
+  },
+  {
+    id: "wrath-kali-1",
+    name: "Wrath of Kali",
+    type: "Sorcery — Curse",
+    cost: 5,
+    effect1: "Destroy all untapped creatures.",
+    effect2: "For each creature destroyed this way, its controller loses 1 life and you gain 1 life.",
+    flavor: "\"Mercy is for tomorrow. Tonight — only judgment.\""
+  },
+  {
+    id: "wrath-kali-2",
+    name: "Wrath of Kali",
+    type: "Sorcery — Curse",
+    cost: 5,
+    effect1: "Destroy all untapped creatures.",
+    effect2: "For each creature destroyed this way, its controller loses 1 life and you gain 1 life.",
+    flavor: "\"Mercy is for tomorrow. Tonight — only judgment.\""
+  },
+  {
+    id: "wrath-kali-3",
+    name: "Wrath of Kali",
+    type: "Sorcery — Curse",
+    cost: 5,
+    effect1: "Destroy all untapped creatures.",
+    effect2: "For each creature destroyed this way, its controller loses 1 life and you gain 1 life.",
+    flavor: "\"Mercy is for tomorrow. Tonight — only judgment.\""
+  },
+  {
+    id: "shrap-forest-sage-1",
+    name: "Shrap of the Forest Sage",
+    type: "Enchantment — Curse",
+    cost: 3,
+    effect1: "Enchant opponent",
+    effect2: "Whenever an opponent casts more than one spell during their turn, they discard a card and sacrifice a creature.",
+    flavor: "\"You have broken the law of balance. Now live in imbalance.\""
+  },
+  {
+    id: "shrap-forest-sage-2",
+    name: "Shrap of the Forest Sage",
+    type: "Enchantment — Curse",
+    cost: 3,
+    effect1: "Enchant opponent",
+    effect2: "Whenever an opponent casts more than one spell during their turn, they discard a card and sacrifice a creature.",
+    flavor: "\"You have broken the law of balance. Now live in imbalance.\""
+  },
+  {
+    id: "shrap-forest-sage-3",
+    name: "Shrap of the Forest Sage",
+    type: "Enchantment — Curse",
+    cost: 3,
+    effect1: "Enchant opponent",
+    effect2: "Whenever an opponent casts more than one spell during their turn, they discard a card and sacrifice a creature.",
+    flavor: "\"You have broken the law of balance. Now live in imbalance.\""
+  },
+  {
+    id: "chains-ravana-1",
+    name: "Chains of Ravana",
+    type: "Instant — Curse",
+    cost: 3,
+    effect1: "Tap target creature. It does not untap during its controller's next untap step.",
+    effect2: "If the creature is a Hero, King, or Warrior, exile the top card of its controller's deck. You may look at that card at any time.",
+    flavor: "\"He did not just bind gods — he bound fate.\""
+  },
+  {
+    id: "chains-ravana-2",
+    name: "Chains of Ravana",
+    type: "Instant — Curse",
+    cost: 3,
+    effect1: "Tap target creature. It does not untap during its controller's next untap step.",
+    effect2: "If the creature is a Hero, King, or Warrior, exile the top card of its controller's deck. You may look at that card at any time.",
+    flavor: "\"He did not just bind gods — he bound fate.\""
+  },
+  {
+    id: "chains-ravana-3",
+    name: "Chains of Ravana",
+    type: "Instant — Curse",
+    cost: 3,
+    effect1: "Tap target creature. It does not untap during its controller's next untap step.",
+    effect2: "If the creature is a Hero, King, or Warrior, exile the top card of its controller's deck. You may look at that card at any time.",
+    flavor: "\"He did not just bind gods — he bound fate.\""
+  },
+  {
+    id: "rajput-warrior-1",
+    name: "Rajput Warrior",
+    type: "Creature — Human Warrior Noble",
+    cost: 3,
+    power: 3,
+    toughness: 2,
+    effect1: "First Strike",
+    effect2: "If you control a King or Queen, Rajput Warrior gains +1/+1 and Vigilance.",
+    effect3: "Whenever Rajput Warrior blocks or becomes blocked, you may Scry 1.",
+    flavor: "They ride with honor as armor — and defiance as blade."
+  },
+  {
+    id: "rajput-warrior-2",
+    name: "Rajput Warrior",
+    type: "Creature — Human Warrior Noble",
+    cost: 3,
+    power: 3,
+    toughness: 2,
+    effect1: "First Strike",
+    effect2: "If you control a King or Queen, Rajput Warrior gains +1/+1 and Vigilance.",
+    effect3: "Whenever Rajput Warrior blocks or becomes blocked, you may Scry 1.",
+    flavor: "They ride with honor as armor — and defiance as blade."
+  },
+  {
+    id: "rajput-warrior-3",
+    name: "Rajput Warrior",
+    type: "Creature — Human Warrior Noble",
+    cost: 3,
+    power: 3,
+    toughness: 2,
+    effect1: "First Strike",
+    effect2: "If you control a King or Queen, Rajput Warrior gains +1/+1 and Vigilance.",
+    effect3: "Whenever Rajput Warrior blocks or becomes blocked, you may Scry 1.",
+    flavor: "They ride with honor as armor — and defiance as blade."
+  },
+  {
+    id: "kshatriya-champion-1",
+    name: "Kshatriya Champion",
+    type: "Creature — Human Soldier Hero",
+    cost: 4,
+    power: 4,
+    toughness: 3,
+    effect1: "Whenever Kshatriya Champion attacks, another Warrior or Soldier you control gets +1/+0 and gains Indestructible until end of turn.",
+    effect2: "If you control an Avatar or God, Kshatriya Champion gains Trample.",
+    flavor: "Duty before victory. Dharma before fear."
+  },
+  {
+    id: "kshatriya-champion-2",
+    name: "Kshatriya Champion",
+    type: "Creature — Human Soldier Hero",
+    cost: 4,
+    power: 4,
+    toughness: 3,
+    effect1: "Whenever Kshatriya Champion attacks, another Warrior or Soldier you control gets +1/+0 and gains Indestructible until end of turn.",
+    effect2: "If you control an Avatar or God, Kshatriya Champion gains Trample.",
+    flavor: "Duty before victory. Dharma before fear."
+  },
+  {
+    id: "kshatriya-champion-3",
+    name: "Kshatriya Champion",
+    type: "Creature — Human Soldier Hero",
+    cost: 4,
+    power: 4,
+    toughness: 3,
+    effect1: "Whenever Kshatriya Champion attacks, another Warrior or Soldier you control gets +1/+0 and gains Indestructible until end of turn.",
+    effect2: "If you control an Avatar or God, Kshatriya Champion gains Trample.",
+    flavor: "Duty before victory. Dharma before fear."
+  },
+  {
+    id: "maratha-cavalry-1",
+    name: "Maratha Cavalry Rider",
+    type: "Creature — Human Warrior Rebel",
+    cost: 3,
+    power: 3,
+    toughness: 3,
+    effect1: "Haste",
+    effect2: "When Maratha Cavalry Rider enters the battlefield, target creature you control gains +1/+0 and cannot be blocked by creatures with power 2 or less this turn.",
+    effect3: "If you control another Rebel, draw a card.",
+    flavor: "Swift, sudden, and gone before the ground stops shaking."
+  },
+  {
+    id: "maratha-cavalry-2",
+    name: "Maratha Cavalry Rider",
+    type: "Creature — Human Warrior Rebel",
+    cost: 3,
+    power: 3,
+    toughness: 3,
+    effect1: "Haste",
+    effect2: "When Maratha Cavalry Rider enters the battlefield, target creature you control gains +1/+0 and cannot be blocked by creatures with power 2 or less this turn.",
+    effect3: "If you control another Rebel, draw a card.",
+    flavor: "Swift, sudden, and gone before the ground stops shaking."
+  },
+  {
+    id: "maratha-cavalry-3",
+    name: "Maratha Cavalry Rider",
+    type: "Creature — Human Warrior Rebel",
+    cost: 3,
+    power: 3,
+    toughness: 3,
+    effect1: "Haste",
+    effect2: "When Maratha Cavalry Rider enters the battlefield, target creature you control gains +1/+0 and cannot be blocked by creatures with power 2 or less this turn.",
+    effect3: "If you control another Rebel, draw a card.",
+    flavor: "Swift, sudden, and gone before the ground stops shaking."
+  },
+  {
+    id: "sikh-akali-nihang-1",
+    name: "Sikh Akali Nihang",
+    type: "Creature — Human Warrior Monk",
+    cost: 4,
+    power: 3,
+    toughness: 5,
+    effect1: "Vigilance, Ward 1",
+    effect2: "At the beginning of combat on your turn, you may pay 1. If you do, another target creature gains +1/+1 and First Strike.",
+    effect3: "If you control a Holy Site or Shrine land, Nihang gains Hexproof.",
+    flavor: "Scripture in one hand. Blade in the other. Steadfast in both."
+  },
+  {
+    id: "sikh-akali-nihang-2",
+    name: "Sikh Akali Nihang",
+    type: "Creature — Human Warrior Monk",
+    cost: 4,
+    power: 3,
+    toughness: 5,
+    effect1: "Vigilance, Ward 1",
+    effect2: "At the beginning of combat on your turn, you may pay 1. If you do, another target creature gains +1/+1 and First Strike.",
+    effect3: "If you control a Holy Site or Shrine land, Nihang gains Hexproof.",
+    flavor: "Scripture in one hand. Blade in the other. Steadfast in both."
+  },
+  {
+    id: "sikh-akali-nihang-3",
+    name: "Sikh Akali Nihang",
+    type: "Creature — Human Warrior Monk",
+    cost: 4,
+    power: 3,
+    toughness: 5,
+    effect1: "Vigilance, Ward 1",
+    effect2: "At the beginning of combat on your turn, you may pay 1. If you do, another target creature gains +1/+1 and First Strike.",
+    effect3: "If you control a Holy Site or Shrine land, Nihang gains Hexproof.",
+    flavor: "Scripture in one hand. Blade in the other. Steadfast in both."
+  },
+  {
+    id: "sikh-akali-nihang-4",
+    name: "Sikh Akali Nihang",
+    type: "Creature — Human Warrior Monk",
+    cost: 4,
+    power: 3,
+    toughness: 5,
+    effect1: "Vigilance, Ward 1",
+    effect2: "At the beginning of combat on your turn, you may pay 1. If you do, another target creature gains +1/+1 and First Strike.",
+    effect3: "If you control a Holy Site or Shrine land, Nihang gains Hexproof.",
+    flavor: "Scripture in one hand. Blade in the other. Steadfast in both."
   }
 ];
