@@ -6,8 +6,12 @@ A Magic: the Gathering inspired card game with country-themed decks. Currently f
 
 ### Easy Launch (Double-Click)
 
-**Linux/Mac:**
-- Double-click `start-game.sh` to launch the game
+**Mac:**
+- Double-click `start-game.command` to launch the game
+
+**Linux:**
+- Double-click `start-game.desktop` to launch the game
+- If prompted, select "Trust and Launch" or "Execute"
 
 **Windows:**
 - Double-click `start-game.bat` to launch the game
