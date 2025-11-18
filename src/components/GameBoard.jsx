@@ -23,15 +23,26 @@ const GameBoard = ({ deck }) => {
       'Enchantment': 4,
       'Instant': 5,
       'Sorcery': 6,
+      'Curse': 6,
       'Planeswalker': 7
     };
 
     return [...cards].sort((a, b) => {
-      // Extract main type (first word before any special characters or dashes)
+      // Extract main type (skip "Legendary" if present)
       const getMainType = (card) => {
         const type = card.type || '';
-        const mainType = type.split(/[—\-]/)[0].trim().split(' ')[0];
-        return mainType;
+        const beforeDash = type.split(/[—]/)[0].trim();
+        const words = beforeDash.split(' ');
+
+        // Skip "Legendary" and other modifiers to get the actual type
+        for (let word of words) {
+          if (typeOrder[word] !== undefined) {
+            return word;
+          }
+        }
+
+        // If no match found, return the first word
+        return words[0];
       };
 
       const typeA = getMainType(a);
@@ -44,7 +55,15 @@ const GameBoard = ({ deck }) => {
         return orderA - orderB;
       }
 
-      // If same type, sort by name
+      // Within same type, sort legendary last, then by name
+      const isLegendaryA = (a.type || '').includes('Legendary');
+      const isLegendaryB = (b.type || '').includes('Legendary');
+
+      if (isLegendaryA !== isLegendaryB) {
+        return isLegendaryA ? 1 : -1; // Non-legendary first
+      }
+
+      // If both same legendary status, sort by name
       return (a.name || '').localeCompare(b.name || '');
     });
   };
