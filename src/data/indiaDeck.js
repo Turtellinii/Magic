@@ -881,5 +881,247 @@ export const indiaDeck = [
     effect2: "Tap, Sacrifice a creature: Return up to one Enchantment and one Creature from your graveyard to your hand.",
     effect3: "If a God or Sage is on the battlefield, gain 2 life.",
     flavor: "Older than the Ganges, her current carries echoes of genesis."
+  },
+  {
+    id: "vajra-of-indra-1",
+    name: "Vajra of Indra",
+    type: "Legendary Artifact — Weapon",
+    cost: 3,
+    effect1: "Equipped creature gets +3/+0 and gains First Strike and Trample.",
+    effect2: "If equipped creature is a God or Avatar, it gains \"When this creature deals damage to a creature, exile that creature instead of destroying it.\"",
+    flavor: "\"Forged from sage-bones and thunder, the Vajra strikes not to wound — but to erase.\""
+  },
+  {
+    id: "khadga-of-wisdom-1",
+    name: "Khadga of Wisdom (Sword of Knowledge)",
+    type: "Artifact — Weapon",
+    cost: 2,
+    effect1: "Equipped creature gets +1/+2 and Vigilance.",
+    effect2: "Whenever equipped creature deals combat damage, Scry 1.",
+    effect3: "If the equipped creature is a Monk or Scholar, draw a card instead.",
+    flavor: "\"Its edge does not sever flesh — it severs illusion.\""
+  },
+  {
+    id: "shiva-trishula-1",
+    name: "Shiva's Trishula",
+    type: "Legendary Artifact — Weapon",
+    cost: 4,
+    effect1: "Equipped creature gets +2/+2.",
+    effect2: "Once per turn: Tap equipped creature and pay 2 to destroy target tapped creature.",
+    effect3: "If equipped to a God, you may untap it after this ability resolves.",
+    flavor: "\"Creation, preservation, and destruction — all bound in three points.\""
+  },
+  {
+    id: "bhishma-spear-1",
+    name: "Bhishma's Spear",
+    type: "Artifact — Weapon",
+    cost: 3,
+    effect1: "Equipped creature gains +3/+0 and Reach.",
+    effect2: "If that creature blocks or is blocked, it gains First Strike until end of turn.",
+    effect3: "If equipped creature has the Soldier or King type, it also gains Hexproof.",
+    flavor: "\"In his vow-bound hand, it halted time itself.\""
+  },
+  {
+    id: "brahmastra-1",
+    name: "Brahmastra",
+    type: "Legendary Artifact — Mythic Weapon",
+    cost: 6,
+    effect1: "Equipped creature gets +5/+0 and Flying.",
+    effect2: "Once per game: You may exile Brahmastra and the equipped creature to destroy all creatures and enchantments on the battlefield.",
+    flavor: "\"A weapon of gods, sealed for good reason.\""
+  },
+  {
+    id: "koh-i-noor-1",
+    name: "Koh-i-Noor Diamond",
+    type: "Legendary Artifact — Jewel",
+    cost: 0,
+    effect1: "When Koh-i-Noor enters the battlefield, choose one: Draw two cards or search your library for a Royal or Noble creature and add it to your hand.",
+    effect2: "As long as you control a King or Queen creature, Koh-i-Noor adds one additional India mana at the beginning of your upkeep.",
+    flavor: "\"Passed between empires like a curse wrapped in brilliance.\""
+  },
+  {
+    id: "sengol-1",
+    name: "Sengol of Tamil Kings",
+    type: "Artifact — Scepter",
+    cost: 0,
+    effect1: "Tap: Add one India mana. Use this only to cast Noble, King, or Lawful-aligned creatures or spells.",
+    effect2: "Creatures you control with the Noble subtype gain +1/+1.",
+    effect3: "If you control three or more enchantments, you may exile Sengol and return a dead Noble creature to the battlefield.",
+    flavor: "\"A symbol of dharma's burden — given, not seized.\""
+  },
+  {
+    id: "veena-of-saraswati-1",
+    name: "Veena of Saraswati",
+    type: "Artifact — Instrument",
+    cost: 0,
+    effect1: "At the beginning of your upkeep, if you control a Bard, Monk, or Sage, draw a card.",
+    effect2: "Pay 2, Tap: All creatures you control gain +0/+1 and Ward 1 until end of turn.",
+    flavor: "\"Every note sung is a thread in the fabric of the cosmos.\""
+  },
+  {
+    id: "chakra-of-vishnu-1",
+    name: "Chakra of Vishnu",
+    type: "Legendary Artifact — Discus",
+    cost: 0,
+    effect1: "Tap, Pay 3: Deal 3 damage to any non-enchanted creature or planeswalker.",
+    effect2: "If you control a God creature, this damage cannot be prevented and exiles the target.",
+    effect3: "If this is used three turns in a row, exile Chakra of Vishnu until end of game.",
+    flavor: "\"It returns only when balance is ready to be restored.\""
+  },
+  {
+    id: "ashoka-edict-pillar-1",
+    name: "Ashoka's Edict Pillar",
+    type: "Artifact — Monument",
+    cost: 0,
+    effect1: "At the beginning of your upkeep, choose one:",
+    effect2: "All players gain 1 life",
+    effect3: "All players draw a card",
+    effect4: "All creatures lose Trample until your next turn",
+    effect5: "If you control a Monk, Sage, or King, the chosen effect applies twice.",
+    flavor: "\"Words etched in stone, softer than any war.\""
+  },
+  {
+    id: "mantra-invincibility-1",
+    name: "Mantra of Invincibility",
+    type: "Instant — Blessing",
+    cost: 2,
+    effect1: "Target creature gains Indestructible and Hexproof until end of turn.",
+    effect2: "If that creature is a Monk, God, or Avatar, it also gains +2/+2.",
+    flavor: "\"Chanted beneath breath, the sound shields like steel.\""
+  },
+  {
+    id: "mantra-invincibility-2",
+    name: "Mantra of Invincibility",
+    type: "Instant — Blessing",
+    cost: 2,
+    effect1: "Target creature gains Indestructible and Hexproof until end of turn.",
+    effect2: "If that creature is a Monk, God, or Avatar, it also gains +2/+2.",
+    flavor: "\"Chanted beneath breath, the sound shields like steel.\""
+  },
+  {
+    id: "mantra-invincibility-3",
+    name: "Mantra of Invincibility",
+    type: "Instant — Blessing",
+    cost: 2,
+    effect1: "Target creature gains Indestructible and Hexproof until end of turn.",
+    effect2: "If that creature is a Monk, God, or Avatar, it also gains +2/+2.",
+    flavor: "\"Chanted beneath breath, the sound shields like steel.\""
+  },
+  {
+    id: "blessing-lakshmi-1",
+    name: "Blessing of Lakshmi",
+    type: "Sorcery — Blessing",
+    cost: 3,
+    effect1: "Gain 4 life.",
+    effect2: "Choose one:",
+    effect3: "Draw two cards",
+    effect4: "Add three India mana of any combination of types",
+    effect5: "Give a target creature +3/+3 until end of turn",
+    flavor: "\"She gives where the heart opens and takes only where greed blooms.\""
+  },
+  {
+    id: "blessing-lakshmi-2",
+    name: "Blessing of Lakshmi",
+    type: "Sorcery — Blessing",
+    cost: 3,
+    effect1: "Gain 4 life.",
+    effect2: "Choose one:",
+    effect3: "Draw two cards",
+    effect4: "Add three India mana of any combination of types",
+    effect5: "Give a target creature +3/+3 until end of turn",
+    flavor: "\"She gives where the heart opens and takes only where greed blooms.\""
+  },
+  {
+    id: "blessing-lakshmi-3",
+    name: "Blessing of Lakshmi",
+    type: "Sorcery — Blessing",
+    cost: 3,
+    effect1: "Gain 4 life.",
+    effect2: "Choose one:",
+    effect3: "Draw two cards",
+    effect4: "Add three India mana of any combination of types",
+    effect5: "Give a target creature +3/+3 until end of turn",
+    flavor: "\"She gives where the heart opens and takes only where greed blooms.\""
+  },
+  {
+    id: "garuda-ascent-1",
+    name: "Garuda's Ascent",
+    type: "Instant — Blessing",
+    cost: 2,
+    effect1: "Target creature gains Flying and +1/+1 until end of turn.",
+    effect2: "If that creature is a Beast, Bird, or Spirit, it also gains \"When this creature deals damage, Scry 1.\"",
+    flavor: "\"On wings of wind, the soul remembers its sky.\""
+  },
+  {
+    id: "garuda-ascent-2",
+    name: "Garuda's Ascent",
+    type: "Instant — Blessing",
+    cost: 2,
+    effect1: "Target creature gains Flying and +1/+1 until end of turn.",
+    effect2: "If that creature is a Beast, Bird, or Spirit, it also gains \"When this creature deals damage, Scry 1.\"",
+    flavor: "\"On wings of wind, the soul remembers its sky.\""
+  },
+  {
+    id: "garuda-ascent-3",
+    name: "Garuda's Ascent",
+    type: "Instant — Blessing",
+    cost: 2,
+    effect1: "Target creature gains Flying and +1/+1 until end of turn.",
+    effect2: "If that creature is a Beast, Bird, or Spirit, it also gains \"When this creature deals damage, Scry 1.\"",
+    flavor: "\"On wings of wind, the soul remembers its sky.\""
+  },
+  {
+    id: "boon-ancestors-1",
+    name: "Boon of the Ancestors",
+    type: "Sorcery — Blessing",
+    cost: 4,
+    effect1: "Return up to two creature cards from your graveyard to your hand.",
+    effect2: "If one of those cards is a King, Monk, or Warrior, you may return it directly to the battlefield tapped instead.",
+    flavor: "\"They do not leave us. They merely wait in the silence.\""
+  },
+  {
+    id: "boon-ancestors-2",
+    name: "Boon of the Ancestors",
+    type: "Sorcery — Blessing",
+    cost: 4,
+    effect1: "Return up to two creature cards from your graveyard to your hand.",
+    effect2: "If one of those cards is a King, Monk, or Warrior, you may return it directly to the battlefield tapped instead.",
+    flavor: "\"They do not leave us. They merely wait in the silence.\""
+  },
+  {
+    id: "boon-ancestors-3",
+    name: "Boon of the Ancestors",
+    type: "Sorcery — Blessing",
+    cost: 4,
+    effect1: "Return up to two creature cards from your graveyard to your hand.",
+    effect2: "If one of those cards is a King, Monk, or Warrior, you may return it directly to the battlefield tapped instead.",
+    flavor: "\"They do not leave us. They merely wait in the silence.\""
+  },
+  {
+    id: "puja-protection-1",
+    name: "Puja of Protection",
+    type: "Enchantment — Blessing",
+    cost: 3,
+    effect1: "When this enters the battlefield, all creatures you control gain Ward 2.",
+    effect2: "At the beginning of your upkeep, you may gain 1 life for each enchanted creature you control.",
+    flavor: "\"Rangoli, incense, and flame — drawn lines against unseen teeth.\""
+  },
+  {
+    id: "puja-protection-2",
+    name: "Puja of Protection",
+    type: "Enchantment — Blessing",
+    cost: 3,
+    effect1: "When this enters the battlefield, all creatures you control gain Ward 2.",
+    effect2: "At the beginning of your upkeep, you may gain 1 life for each enchanted creature you control.",
+    flavor: "\"Rangoli, incense, and flame — drawn lines against unseen teeth.\""
+  },
+  {
+    id: "puja-protection-3",
+    name: "Puja of Protection",
+    type: "Enchantment — Blessing",
+    cost: 3,
+    effect1: "When this enters the battlefield, all creatures you control gain Ward 2.",
+    effect2: "At the beginning of your upkeep, you may gain 1 life for each enchanted creature you control.",
+    flavor: "\"Rangoli, incense, and flame — drawn lines against unseen teeth.\""
   }
 ];
