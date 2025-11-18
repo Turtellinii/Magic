@@ -1,16 +1,49 @@
-# React + Vite
+# Country Card Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Magic: the Gathering inspired card game with country-themed decks. Currently featuring the India deck.
 
-Currently, two official plugins are available:
+## Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Easy Launch (Double-Click)
 
-## React Compiler
+**Linux/Mac:**
+- Double-click `start-game.sh` to launch the game
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Windows:**
+- Double-click `start-game.bat` to launch the game
 
-## Expanding the ESLint configuration
+The game will automatically open in your browser!
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Manual Launch (Command Line)
+
+If the double-click method doesn't work, you can start the game manually:
+
+```bash
+npm install    # Only needed the first time
+npm run dev
+```
+
+Then open your browser to the URL shown in the terminal (usually http://localhost:5173)
+
+## How to Play
+
+1. **Open Card Finder**: Click the "Open Card Finder" button at the top
+2. **Search Cards**: Type to search by card name or type
+3. **Add Cards to Hand**: Select a card and click "Add to Player Hand" or "Add to Opponent Hand"
+4. **Play Cards**: Click cards in your hand to move them to the battlefield
+5. **Move to Graveyard**: Click battlefield cards to move them to the graveyard
+6. **View Zones**: Click "Graveyard" or "Exile" buttons to view those zones
+
+## Current Features
+
+- Player and Opponent hands and battlefields
+- Graveyard and Exile zones (viewable via buttons)
+- Card Finder to search and add cards to either hand
+- 10 India deck cards (all land cards)
+- Interactive card movement between zones
+
+## Tech Stack
+
+- React 19
+- Vite 7
+- CSS3 for styling
