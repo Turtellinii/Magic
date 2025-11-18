@@ -106,6 +106,26 @@ const GameBoard = ({ deck }) => {
     }
   };
 
+  const drawPlayerCard = () => {
+    if (playerDeck.length === 0) {
+      alert('No cards left in deck!');
+      return;
+    }
+    const card = playerDeck[0];
+    setPlayerHand([...playerHand, { ...card, instanceId: Date.now() }]);
+    setPlayerDeck(playerDeck.slice(1));
+  };
+
+  const drawOpponentCard = () => {
+    if (opponentDeck.length === 0) {
+      alert('No cards left in opponent deck!');
+      return;
+    }
+    const card = opponentDeck[0];
+    setOpponentHand([...opponentHand, { ...card, instanceId: Date.now() }]);
+    setOpponentDeck(opponentDeck.slice(1));
+  };
+
   return (
     <div className="game-board">
       <div className="game-header">
@@ -131,6 +151,9 @@ const GameBoard = ({ deck }) => {
         <h2>Opponent</h2>
 
         <div className="zone-controls">
+          <button className="draw-btn" onClick={drawOpponentCard}>
+            Draw Card
+          </button>
           <button onClick={() => setShowOpponentGraveyard(!showOpponentGraveyard)}>
             Graveyard ({opponentGraveyard.length})
           </button>
@@ -234,6 +257,9 @@ const GameBoard = ({ deck }) => {
         </div>
 
         <div className="zone-controls">
+          <button className="draw-btn" onClick={drawPlayerCard}>
+            Draw Card
+          </button>
           <button onClick={() => setShowPlayerGraveyard(!showPlayerGraveyard)}>
             Graveyard ({playerGraveyard.length})
           </button>
