@@ -16,7 +16,7 @@ A Magic: the Gathering inspired card game with country-themed decks. Currently f
 **Windows:**
 - Double-click `start-game.bat` to launch the game
 
-The game will automatically open in your browser!
+The launcher will automatically install dependencies on first run and then open the game in your browser!
 
 ### Manual Launch (Command Line)
 

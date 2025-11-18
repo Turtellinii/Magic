@@ -3,7 +3,19 @@ echo =======================================
 echo   Starting Country Card Game...
 echo =======================================
 echo.
-echo The server will start in a moment.
+
+REM Check if node_modules exists, if not, install dependencies
+if not exist "node_modules\" (
+    echo First time setup - Installing dependencies...
+    echo This may take a minute...
+    echo.
+    call npm install
+    echo.
+    echo Installation complete!
+    echo.
+)
+
+echo Starting the game server...
 echo If your browser doesn't open automatically,
 echo look for the 'Local:' URL below and open it manually.
 echo.
