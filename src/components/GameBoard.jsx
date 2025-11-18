@@ -168,6 +168,19 @@ const GameBoard = ({ deck }) => {
           </div>
         )}
 
+        <div className="zone hand">
+          <h3>Hand ({opponentHand.length})</h3>
+          <div className="card-container">
+            {opponentHand.map((card, index) => (
+              <Card
+                key={index}
+                card={card}
+                onClick={() => playCardFromOpponentHand(index)}
+              />
+            ))}
+          </div>
+        </div>
+
         <div className="zone battlefield">
           <h3>Battlefield</h3>
           <div className="card-container">
@@ -184,37 +197,11 @@ const GameBoard = ({ deck }) => {
             ))}
           </div>
         </div>
-
-        <div className="zone hand">
-          <h3>Hand ({opponentHand.length})</h3>
-          <div className="card-container">
-            {opponentHand.map((card, index) => (
-              <Card
-                key={index}
-                card={card}
-                onClick={() => playCardFromOpponentHand(index)}
-              />
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Player Section */}
       <div className="player-section player-section-main">
         <h2>Player</h2>
-
-        <div className="zone hand">
-          <h3>Hand ({playerHand.length})</h3>
-          <div className="card-container">
-            {playerHand.map((card, index) => (
-              <Card
-                key={index}
-                card={card}
-                onClick={() => playCardFromPlayerHand(index)}
-              />
-            ))}
-          </div>
-        </div>
 
         <div className="zone battlefield">
           <h3>Battlefield</h3>
@@ -228,6 +215,19 @@ const GameBoard = ({ deck }) => {
                     movePlayerCardToGraveyard(index, 'battlefield');
                   }
                 }}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="zone hand">
+          <h3>Hand ({playerHand.length})</h3>
+          <div className="card-container">
+            {playerHand.map((card, index) => (
+              <Card
+                key={index}
+                card={card}
+                onClick={() => playCardFromPlayerHand(index)}
               />
             ))}
           </div>
