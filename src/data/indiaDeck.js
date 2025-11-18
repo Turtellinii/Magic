@@ -344,5 +344,252 @@ export const indiaDeck = [
     effect2: "Whenever a Monk or Pilgrim enters the battlefield under your control, you may gain 1 life.",
     effect3: "Tap, Pay 2: Shuffle up to two cards from your graveyard into your deck.",
     flavor: "\"A dome of memory. A gate of return.\""
+  },
+  {
+    id: "ganges-1",
+    name: "Ganges River",
+    type: "Legendary Land — River",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Sacrifice a creature: Return up to one creature card from your graveyard to your hand.",
+    effect3: "Tap, Pay 3: Exile target non-enchanted creature. Return it to play at the beginning of your next turn.",
+    flavor: "\"She purifies the dead and delivers the living.\""
+  },
+  {
+    id: "ganges-2",
+    name: "Ganges River",
+    type: "Legendary Land — River",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Sacrifice a creature: Return up to one creature card from your graveyard to your hand.",
+    effect3: "Tap, Pay 3: Exile target non-enchanted creature. Return it to play at the beginning of your next turn.",
+    flavor: "\"She purifies the dead and delivers the living.\""
+  },
+  {
+    id: "ellora-1",
+    name: "Ellora Caves",
+    type: "Land — Temple Caves",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Whenever you play an Artifact or God card, you may Scry 1.",
+    effect3: "Tap, Pay 1: Target Artifact becomes indestructible until end of turn.",
+    flavor: "\"Stone became story, and story outlasted empires.\""
+  },
+  {
+    id: "ellora-2",
+    name: "Ellora Caves",
+    type: "Land — Temple Caves",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Whenever you play an Artifact or God card, you may Scry 1.",
+    effect3: "Tap, Pay 1: Target Artifact becomes indestructible until end of turn.",
+    flavor: "\"Stone became story, and story outlasted empires.\""
+  },
+  {
+    id: "ellora-3",
+    name: "Ellora Caves",
+    type: "Land — Temple Caves",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Whenever you play an Artifact or God card, you may Scry 1.",
+    effect3: "Tap, Pay 1: Target Artifact becomes indestructible until end of turn.",
+    flavor: "\"Stone became story, and story outlasted empires.\""
+  },
+  {
+    id: "chilika-1",
+    name: "Chilika Lake",
+    type: "Land — Wetlands",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Tap target creature. If that creature is an Illusion or Spirit, it cannot untap next turn.",
+    flavor: "\"Mist rolls over myth, and birds carry rumors of the beyond.\""
+  },
+  {
+    id: "chilika-2",
+    name: "Chilika Lake",
+    type: "Land — Wetlands",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Tap target creature. If that creature is an Illusion or Spirit, it cannot untap next turn.",
+    flavor: "\"Mist rolls over myth, and birds carry rumors of the beyond.\""
+  },
+  {
+    id: "chilika-3",
+    name: "Chilika Lake",
+    type: "Land — Wetlands",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Tap target creature. If that creature is an Illusion or Spirit, it cannot untap next turn.",
+    flavor: "\"Mist rolls over myth, and birds carry rumors of the beyond.\""
+  },
+  {
+    id: "hampi-1",
+    name: "Hampi, City of Ruins",
+    type: "Land — Lost Capital",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "If you control no artifacts, Hampi enters tapped.",
+    effect3: "Tap, Pay 2: Target creature gets +1/+0 for each Artifact and Land card in your graveyard.",
+    flavor: "\"Once gold. Now stone. Still sacred.\""
+  },
+  {
+    id: "hampi-2",
+    name: "Hampi, City of Ruins",
+    type: "Land — Lost Capital",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "If you control no artifacts, Hampi enters tapped.",
+    effect3: "Tap, Pay 2: Target creature gets +1/+0 for each Artifact and Land card in your graveyard.",
+    flavor: "\"Once gold. Now stone. Still sacred.\""
+  },
+  {
+    id: "hampi-3",
+    name: "Hampi, City of Ruins",
+    type: "Land — Lost Capital",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "If you control no artifacts, Hampi enters tapped.",
+    effect3: "Tap, Pay 2: Target creature gets +1/+0 for each Artifact and Land card in your graveyard.",
+    flavor: "\"Once gold. Now stone. Still sacred.\""
+  },
+  {
+    id: "dwarka-1",
+    name: "Dwarka, Sunken Kingdom",
+    type: "Legendary Land — Lost City",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Mill the top three cards of your deck. If a God or King is among them, you may return it to your hand.",
+    effect3: "Whenever a legendary creature enters your graveyard from the battlefield, you may tap Dwarka to gain 2 life.",
+    flavor: "\"Submerged in myth. Remembered in salt and prayer.\""
+  },
+  {
+    id: "dwarka-2",
+    name: "Dwarka, Sunken Kingdom",
+    type: "Legendary Land — Lost City",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Mill the top three cards of your deck. If a God or King is among them, you may return it to your hand.",
+    effect3: "Whenever a legendary creature enters your graveyard from the battlefield, you may tap Dwarka to gain 2 life.",
+    flavor: "\"Submerged in myth. Remembered in salt and prayer.\""
+  },
+  {
+    id: "amaravati-1",
+    name: "Amaravati, Celestial Capital",
+    type: "Legendary Land — Heaven",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 4: Until end of turn, all your Spirit and God creatures gain Flying and Lifelink.",
+    effect3: "If you control five or more Enchantments, you may activate this ability for 2 less.",
+    flavor: "\"The gods feast above the clouds, waiting for the world to awaken.\""
+  },
+  {
+    id: "amaravati-2",
+    name: "Amaravati, Celestial Capital",
+    type: "Legendary Land — Heaven",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 4: Until end of turn, all your Spirit and God creatures gain Flying and Lifelink.",
+    effect3: "If you control five or more Enchantments, you may activate this ability for 2 less.",
+    flavor: "\"The gods feast above the clouds, waiting for the world to awaken.\""
+  },
+  {
+    id: "kedarnath-1",
+    name: "Kedarnath, Temple in the Clouds",
+    type: "Legendary Land — Mountain Shrine",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "When a God or Monk enters the battlefield under your control, you may gain 1 life.",
+    effect3: "Tap, Pay 3: Return target creature from your graveyard to your hand. If it's a God, it enters the battlefield instead.",
+    flavor: "Shrouded in mist, its silence calls gods home."
+  },
+  {
+    id: "kedarnath-2",
+    name: "Kedarnath, Temple in the Clouds",
+    type: "Legendary Land — Mountain Shrine",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "When a God or Monk enters the battlefield under your control, you may gain 1 life.",
+    effect3: "Tap, Pay 3: Return target creature from your graveyard to your hand. If it's a God, it enters the battlefield instead.",
+    flavor: "Shrouded in mist, its silence calls gods home."
+  },
+  {
+    id: "golden-temple-1",
+    name: "Golden Temple of Amritsar",
+    type: "Land — Holy Sanctuary",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: All creatures you control gain Lifelink until end of turn.",
+    effect3: "If you control three or more Monks or Sages, draw a card.",
+    flavor: "Its reflection in water is second only to the light it casts in hearts."
+  },
+  {
+    id: "golden-temple-2",
+    name: "Golden Temple of Amritsar",
+    type: "Land — Holy Sanctuary",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: All creatures you control gain Lifelink until end of turn.",
+    effect3: "If you control three or more Monks or Sages, draw a card.",
+    flavor: "Its reflection in water is second only to the light it casts in hearts."
+  },
+  {
+    id: "golden-temple-3",
+    name: "Golden Temple of Amritsar",
+    type: "Land — Holy Sanctuary",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: All creatures you control gain Lifelink until end of turn.",
+    effect3: "If you control three or more Monks or Sages, draw a card.",
+    flavor: "Its reflection in water is second only to the light it casts in hearts."
+  },
+  {
+    id: "kashi-vishwanath-1",
+    name: "Kashi Vishwanath Corridor",
+    type: "Legendary Land — Passage of Devotion",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "When you cast your second spell each turn, Scry 1.",
+    effect3: "Tap, Pay 1: Target Monk, Sage, or Spirit gets +1/+1 and Hexproof until end of turn.",
+    flavor: "The sacred breathes anew where prayers flow like rivers."
+  },
+  {
+    id: "kashi-vishwanath-2",
+    name: "Kashi Vishwanath Corridor",
+    type: "Legendary Land — Passage of Devotion",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "When you cast your second spell each turn, Scry 1.",
+    effect3: "Tap, Pay 1: Target Monk, Sage, or Spirit gets +1/+1 and Hexproof until end of turn.",
+    flavor: "The sacred breathes anew where prayers flow like rivers."
+  },
+  {
+    id: "pushkar-1",
+    name: "Pushkar Lake",
+    type: "Land — Sacred Waters",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Gain 2 life. If a Spirit or Beast entered the battlefield this turn, gain 3 life instead.",
+    effect3: "Tap, Sacrifice Pushkar Lake: Return target enchantment or blessing from your graveyard to your hand.",
+    flavor: "It remembers every prayer, whispered or wept."
+  },
+  {
+    id: "pushkar-2",
+    name: "Pushkar Lake",
+    type: "Land — Sacred Waters",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Gain 2 life. If a Spirit or Beast entered the battlefield this turn, gain 3 life instead.",
+    effect3: "Tap, Sacrifice Pushkar Lake: Return target enchantment or blessing from your graveyard to your hand.",
+    flavor: "It remembers every prayer, whispered or wept."
+  },
+  {
+    id: "pushkar-3",
+    name: "Pushkar Lake",
+    type: "Land — Sacred Waters",
+    cost: 0,
+    effect1: "Tap: Add one India mana.",
+    effect2: "Tap, Pay 2: Gain 2 life. If a Spirit or Beast entered the battlefield this turn, gain 3 life instead.",
+    effect3: "Tap, Sacrifice Pushkar Lake: Return target enchantment or blessing from your graveyard to your hand.",
+    flavor: "It remembers every prayer, whispered or wept."
   }
 ];
