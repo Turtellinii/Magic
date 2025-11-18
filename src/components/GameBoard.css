@@ -122,6 +122,57 @@
   font-size: 16px;
 }
 
+.tracker-group {
+  display: flex;
+  gap: 20px;
+  margin-left: auto;
+}
+
+.tracker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 2px solid #8b6914;
+}
+
+.tracker-label {
+  color: #f0e6d2;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.tracker-value {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 18px;
+  min-width: 30px;
+  text-align: center;
+}
+
+.tracker-btn {
+  background: #8b6914;
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tracker-btn:hover {
+  background: #a67c1a;
+  transform: scale(1.1);
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;

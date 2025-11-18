@@ -80,6 +80,12 @@ const GameBoard = ({ deck }) => {
   const [playerDeck, setPlayerDeck] = useState(shuffleDeck(deck));
   const [opponentDeck, setOpponentDeck] = useState(shuffleDeck(deck));
 
+  // Life and mana trackers
+  const [playerLife, setPlayerLife] = useState(20);
+  const [opponentLife, setOpponentLife] = useState(20);
+  const [playerMana, setPlayerMana] = useState(0);
+  const [opponentMana, setOpponentMana] = useState(0);
+
   // UI state
   const [showPlayerGraveyard, setShowPlayerGraveyard] = useState(false);
   const [showOpponentGraveyard, setShowOpponentGraveyard] = useState(false);
@@ -225,6 +231,21 @@ const GameBoard = ({ deck }) => {
             Exile ({opponentExile.length})
           </button>
           <div className="deck-info">Deck: {opponentDeck.length}</div>
+
+          <div className="tracker-group">
+            <div className="tracker">
+              <span className="tracker-label">Life:</span>
+              <button className="tracker-btn" onClick={() => setOpponentLife(opponentLife - 1)}>-</button>
+              <span className="tracker-value">{opponentLife}</span>
+              <button className="tracker-btn" onClick={() => setOpponentLife(opponentLife + 1)}>+</button>
+            </div>
+            <div className="tracker">
+              <span className="tracker-label">Mana:</span>
+              <button className="tracker-btn" onClick={() => setOpponentMana(Math.max(0, opponentMana - 1))}>-</button>
+              <span className="tracker-value">{opponentMana}</span>
+              <button className="tracker-btn" onClick={() => setOpponentMana(opponentMana + 1)}>+</button>
+            </div>
+          </div>
         </div>
 
         {showOpponentGraveyard && (
@@ -339,6 +360,21 @@ const GameBoard = ({ deck }) => {
             Exile ({playerExile.length})
           </button>
           <div className="deck-info">Deck: {playerDeck.length}</div>
+
+          <div className="tracker-group">
+            <div className="tracker">
+              <span className="tracker-label">Life:</span>
+              <button className="tracker-btn" onClick={() => setPlayerLife(playerLife - 1)}>-</button>
+              <span className="tracker-value">{playerLife}</span>
+              <button className="tracker-btn" onClick={() => setPlayerLife(playerLife + 1)}>+</button>
+            </div>
+            <div className="tracker">
+              <span className="tracker-label">Mana:</span>
+              <button className="tracker-btn" onClick={() => setPlayerMana(Math.max(0, playerMana - 1))}>-</button>
+              <span className="tracker-value">{playerMana}</span>
+              <button className="tracker-btn" onClick={() => setPlayerMana(playerMana + 1)}>+</button>
+            </div>
+          </div>
         </div>
 
         {showPlayerGraveyard && (
