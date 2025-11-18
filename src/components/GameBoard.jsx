@@ -4,6 +4,16 @@ import CardFinder from './CardFinder';
 import './GameBoard.css';
 
 const GameBoard = ({ deck }) => {
+  // Shuffle function using Fisher-Yates algorithm
+  const shuffleDeck = (deckToShuffle) => {
+    const shuffled = [...deckToShuffle];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   // Game state
   const [playerHand, setPlayerHand] = useState([]);
   const [opponentHand, setOpponentHand] = useState([]);
@@ -13,8 +23,8 @@ const GameBoard = ({ deck }) => {
   const [opponentGraveyard, setOpponentGraveyard] = useState([]);
   const [playerExile, setPlayerExile] = useState([]);
   const [opponentExile, setOpponentExile] = useState([]);
-  const [playerDeck, setPlayerDeck] = useState([...deck]);
-  const [opponentDeck, setOpponentDeck] = useState([...deck]);
+  const [playerDeck, setPlayerDeck] = useState(shuffleDeck(deck));
+  const [opponentDeck, setOpponentDeck] = useState(shuffleDeck(deck));
 
   // UI state
   const [showPlayerGraveyard, setShowPlayerGraveyard] = useState(false);
