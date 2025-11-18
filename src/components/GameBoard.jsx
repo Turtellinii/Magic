@@ -14,6 +14,41 @@ const GameBoard = ({ deck }) => {
     return shuffled;
   };
 
+  // Sort cards by type
+  const sortCardsByType = (cards) => {
+    const typeOrder = {
+      'Land': 1,
+      'Creature': 2,
+      'Artifact': 3,
+      'Enchantment': 4,
+      'Instant': 5,
+      'Sorcery': 6,
+      'Planeswalker': 7
+    };
+
+    return [...cards].sort((a, b) => {
+      // Extract main type (first word before any special characters or dashes)
+      const getMainType = (card) => {
+        const type = card.type || '';
+        const mainType = type.split(/[—\-]/)[0].trim().split(' ')[0];
+        return mainType;
+      };
+
+      const typeA = getMainType(a);
+      const typeB = getMainType(b);
+
+      const orderA = typeOrder[typeA] || 99;
+      const orderB = typeOrder[typeB] || 99;
+
+      if (orderA !== orderB) {
+        return orderA - orderB;
+      }
+
+      // If same type, sort by name
+      return (a.name || '').localeCompare(b.name || '');
+    });
+  };
+
   // Game state
   const [playerHand, setPlayerHand] = useState([]);
   const [opponentHand, setOpponentHand] = useState([]);
@@ -204,11 +239,14 @@ const GameBoard = ({ deck }) => {
         <div className="zone hand">
           <h3>Hand ({opponentHand.length})</h3>
           <div className="card-container">
-            {opponentHand.map((card, index) => (
+            {sortCardsByType(opponentHand).map((card, index) => (
               <Card
                 key={index}
                 card={card}
-                onClick={() => playCardFromOpponentHand(index)}
+                onClick={() => {
+                  const originalIndex = opponentHand.findIndex(c => c.instanceId === card.instanceId);
+                  playCardFromOpponentHand(originalIndex);
+                }}
               />
             ))}
           </div>
@@ -217,13 +255,14 @@ const GameBoard = ({ deck }) => {
         <div className="zone battlefield">
           <h3>Battlefield</h3>
           <div className="card-container">
-            {opponentBattlefield.map((card, index) => (
+            {sortCardsByType(opponentBattlefield).map((card, index) => (
               <Card
                 key={index}
                 card={card}
                 onClick={() => {
                   if (window.confirm('Move to graveyard?')) {
-                    moveOpponentCardToGraveyard(index, 'battlefield');
+                    const originalIndex = opponentBattlefield.findIndex(c => c.instanceId === card.instanceId);
+                    moveOpponentCardToGraveyard(originalIndex, 'battlefield');
                   }
                 }}
               />
@@ -239,13 +278,14 @@ const GameBoard = ({ deck }) => {
         <div className="zone battlefield">
           <h3>Battlefield</h3>
           <div className="card-container">
-            {playerBattlefield.map((card, index) => (
+            {sortCardsByType(playerBattlefield).map((card, index) => (
               <Card
                 key={index}
                 card={card}
                 onClick={() => {
                   if (window.confirm('Move to graveyard?')) {
-                    movePlayerCardToGraveyard(index, 'battlefield');
+                    const originalIndex = playerBattlefield.findIndex(c => c.instanceId === card.instanceId);
+                    movePlayerCardToGraveyard(originalIndex, 'battlefield');
                   }
                 }}
               />
@@ -256,11 +296,14 @@ const GameBoard = ({ deck }) => {
         <div className="zone hand">
           <h3>Hand ({playerHand.length})</h3>
           <div className="card-container">
-            {playerHand.map((card, index) => (
+            {sortCardsByType(playerHand).map((card, index) => (
               <Card
                 key={index}
                 card={card}
-                onClick={() => playCardFromPlayerHand(index)}
+                onClick={() => {
+                  const originalIndex = playerHand.findIndex(c => c.instanceId === card.instanceId);
+                  playCardFromPlayerHand(originalIndex);
+                }}
               />
             ))}
           </div>

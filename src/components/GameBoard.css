@@ -73,11 +73,11 @@
 
 .card-container {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
   min-height: 100px;
   background: rgba(0, 0, 0, 0.2);
-  padding: 15px;
+  padding: 12px;
   border-radius: 8px;
 }
 
