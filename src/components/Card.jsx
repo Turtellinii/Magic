@@ -70,6 +70,12 @@ const Card = ({ card, onClick, onRightClick, onEffectClick, isSmall, isTapped, o
       {card.flavor && (
         <div className="card-flavor">{card.flavor}</div>
       )}
+
+      {(card.power !== undefined || card.toughness !== undefined) && (
+        <div className="card-stats">
+          {card.power}/{card.toughness}
+        </div>
+      )}
     </div>
   );
 };
