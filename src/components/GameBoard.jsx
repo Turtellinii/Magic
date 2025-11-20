@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import CardFinder from './CardFinder';
 import './GameBoard.css';
@@ -93,6 +93,25 @@ const GameBoard = ({ deck }) => {
   const [showOpponentExile, setShowOpponentExile] = useState(false);
   const [showCardFinder, setShowCardFinder] = useState(false);
 
+  // Draw initial hands (7 cards each) when game starts
+  useEffect(() => {
+    // Draw 7 cards for player
+    const playerInitialHand = playerDeck.slice(0, 7).map((card, i) => ({
+      ...card,
+      instanceId: Date.now() + i
+    }));
+    setPlayerHand(playerInitialHand);
+    setPlayerDeck(playerDeck.slice(7));
+
+    // Draw 7 cards for opponent
+    const opponentInitialHand = opponentDeck.slice(0, 7).map((card, i) => ({
+      ...card,
+      instanceId: Date.now() + 100 + i
+    }));
+    setOpponentHand(opponentInitialHand);
+    setOpponentDeck(opponentDeck.slice(7));
+  }, []); // Empty dependency array means this runs once on mount
+
   // Card movement functions
   const moveCardToPlayerHand = (card) => {
     setPlayerHand([...playerHand, { ...card, instanceId: Date.now() }]);
@@ -157,6 +176,12 @@ const GameBoard = ({ deck }) => {
     setPlayerBattlefield(playerBattlefield.map(card => ({ ...card, tapped: false })));
     // Reset mana
     setPlayerMana(0);
+    // Opponent draws a card at the beginning of their turn
+    if (opponentDeck.length > 0) {
+      const card = opponentDeck[0];
+      setOpponentHand([...opponentHand, { ...card, instanceId: Date.now() }]);
+      setOpponentDeck(opponentDeck.slice(1));
+    }
   };
 
   const endOpponentTurn = () => {
@@ -164,6 +189,23 @@ const GameBoard = ({ deck }) => {
     setOpponentBattlefield(opponentBattlefield.map(card => ({ ...card, tapped: false })));
     // Reset mana
     setOpponentMana(0);
+    // Player draws a card at the beginning of their turn
+    if (playerDeck.length > 0) {
+      const card = playerDeck[0];
+      setPlayerHand([...playerHand, { ...card, instanceId: Date.now() }]);
+      setPlayerDeck(playerDeck.slice(1));
+    }
+  };
+
+  // Effect click handler (taps the card for now, will be expanded later)
+  const handlePlayerEffectClick = (cardInstanceId, effectIndex) => {
+    // For now, just tap the card when an effect is clicked
+    tapPlayerCard(cardInstanceId);
+  };
+
+  const handleOpponentEffectClick = (cardInstanceId, effectIndex) => {
+    // For now, just tap the card when an effect is clicked
+    tapOpponentCard(cardInstanceId);
   };
 
   const movePlayerCardToGraveyard = (cardIndex, fromZone) => {
@@ -355,7 +397,9 @@ const GameBoard = ({ deck }) => {
                 key={index}
                 card={card}
                 isTapped={card.tapped}
+                onBattlefield={true}
                 onClick={() => tapOpponentCard(card.instanceId)}
+                onEffectClick={(effectIndex) => handleOpponentEffectClick(card.instanceId, effectIndex)}
                 onRightClick={(e) => {
                   e.preventDefault();
                   if (window.confirm('Move to graveyard?')) {
@@ -381,7 +425,9 @@ const GameBoard = ({ deck }) => {
                 key={index}
                 card={card}
                 isTapped={card.tapped}
+                onBattlefield={true}
                 onClick={() => tapPlayerCard(card.instanceId)}
+                onEffectClick={(effectIndex) => handlePlayerEffectClick(card.instanceId, effectIndex)}
                 onRightClick={(e) => {
                   e.preventDefault();
                   if (window.confirm('Move to graveyard?')) {

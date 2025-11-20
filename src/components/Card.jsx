@@ -1,8 +1,15 @@
 import React from 'react';
 import './Card.css';
 
-const Card = ({ card, onClick, onRightClick, isSmall, isTapped }) => {
+const Card = ({ card, onClick, onRightClick, onEffectClick, isSmall, isTapped, onBattlefield }) => {
   if (!card) return null;
+
+  const handleEffectClick = (e, effectIndex) => {
+    if (onBattlefield && onEffectClick) {
+      e.stopPropagation();
+      onEffectClick(effectIndex);
+    }
+  };
 
   return (
     <div
@@ -18,9 +25,46 @@ const Card = ({ card, onClick, onRightClick, isSmall, isTapped }) => {
       <div className="card-type">{card.type}</div>
 
       <div className="card-effects">
-        {card.effect1 && <div className="card-effect">{card.effect1}</div>}
-        {card.effect2 && <div className="card-effect">{card.effect2}</div>}
-        {card.effect3 && <div className="card-effect">{card.effect3}</div>}
+        {card.effect1 && (
+          <div
+            className={`card-effect ${onBattlefield ? 'card-effect-clickable' : ''}`}
+            onClick={(e) => handleEffectClick(e, 1)}
+          >
+            {card.effect1}
+          </div>
+        )}
+        {card.effect2 && (
+          <div
+            className={`card-effect ${onBattlefield ? 'card-effect-clickable' : ''}`}
+            onClick={(e) => handleEffectClick(e, 2)}
+          >
+            {card.effect2}
+          </div>
+        )}
+        {card.effect3 && (
+          <div
+            className={`card-effect ${onBattlefield ? 'card-effect-clickable' : ''}`}
+            onClick={(e) => handleEffectClick(e, 3)}
+          >
+            {card.effect3}
+          </div>
+        )}
+        {card.effect4 && (
+          <div
+            className={`card-effect ${onBattlefield ? 'card-effect-clickable' : ''}`}
+            onClick={(e) => handleEffectClick(e, 4)}
+          >
+            {card.effect4}
+          </div>
+        )}
+        {card.effect5 && (
+          <div
+            className={`card-effect ${onBattlefield ? 'card-effect-clickable' : ''}`}
+            onClick={(e) => handleEffectClick(e, 5)}
+          >
+            {card.effect5}
+          </div>
+        )}
       </div>
 
       {card.flavor && (
