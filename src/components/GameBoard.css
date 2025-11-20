@@ -116,6 +116,17 @@
   box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
 }
 
+.end-turn-btn {
+  background: #c43a3a !important;
+  border: 2px solid #e74c3c !important;
+  font-size: 15px !important;
+}
+
+.end-turn-btn:hover {
+  background: #e74c3c !important;
+  box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+}
+
 .deck-info {
   color: #f0e6d2;
   font-weight: bold;

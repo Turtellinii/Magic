@@ -104,14 +104,66 @@ const GameBoard = ({ deck }) => {
 
   const playCardFromPlayerHand = (cardIndex) => {
     const card = playerHand[cardIndex];
-    setPlayerBattlefield([...playerBattlefield, card]);
+    setPlayerBattlefield([...playerBattlefield, { ...card, tapped: false }]);
     setPlayerHand(playerHand.filter((_, i) => i !== cardIndex));
   };
 
   const playCardFromOpponentHand = (cardIndex) => {
     const card = opponentHand[cardIndex];
-    setOpponentBattlefield([...opponentBattlefield, card]);
+    setOpponentBattlefield([...opponentBattlefield, { ...card, tapped: false }]);
     setOpponentHand(opponentHand.filter((_, i) => i !== cardIndex));
+  };
+
+  // Check if a card is a land
+  const isLandCard = (card) => {
+    const type = card.type || '';
+    return type.includes('Land');
+  };
+
+  // Tap/untap card functions
+  const tapPlayerCard = (cardInstanceId) => {
+    setPlayerBattlefield(playerBattlefield.map(card => {
+      if (card.instanceId === cardInstanceId) {
+        if (!card.tapped) {
+          // Tapping the card
+          if (isLandCard(card)) {
+            setPlayerMana(playerMana + 1);
+          }
+          return { ...card, tapped: true };
+        }
+      }
+      return card;
+    }));
+  };
+
+  const tapOpponentCard = (cardInstanceId) => {
+    setOpponentBattlefield(opponentBattlefield.map(card => {
+      if (card.instanceId === cardInstanceId) {
+        if (!card.tapped) {
+          // Tapping the card
+          if (isLandCard(card)) {
+            setOpponentMana(opponentMana + 1);
+          }
+          return { ...card, tapped: true };
+        }
+      }
+      return card;
+    }));
+  };
+
+  // End turn functions
+  const endPlayerTurn = () => {
+    // Untap all player cards
+    setPlayerBattlefield(playerBattlefield.map(card => ({ ...card, tapped: false })));
+    // Reset mana
+    setPlayerMana(0);
+  };
+
+  const endOpponentTurn = () => {
+    // Untap all opponent cards
+    setOpponentBattlefield(opponentBattlefield.map(card => ({ ...card, tapped: false })));
+    // Reset mana
+    setOpponentMana(0);
   };
 
   const movePlayerCardToGraveyard = (cardIndex, fromZone) => {
@@ -224,6 +276,9 @@ const GameBoard = ({ deck }) => {
           <button className="draw-btn" onClick={drawOpponentCard}>
             Draw Card
           </button>
+          <button className="end-turn-btn" onClick={endOpponentTurn}>
+            End Turn
+          </button>
           <button onClick={() => setShowOpponentGraveyard(!showOpponentGraveyard)}>
             Graveyard ({opponentGraveyard.length})
           </button>
@@ -299,7 +354,10 @@ const GameBoard = ({ deck }) => {
               <Card
                 key={index}
                 card={card}
-                onClick={() => {
+                isTapped={card.tapped}
+                onClick={() => tapOpponentCard(card.instanceId)}
+                onRightClick={(e) => {
+                  e.preventDefault();
                   if (window.confirm('Move to graveyard?')) {
                     const originalIndex = opponentBattlefield.findIndex(c => c.instanceId === card.instanceId);
                     moveOpponentCardToGraveyard(originalIndex, 'battlefield');
@@ -322,7 +380,10 @@ const GameBoard = ({ deck }) => {
               <Card
                 key={index}
                 card={card}
-                onClick={() => {
+                isTapped={card.tapped}
+                onClick={() => tapPlayerCard(card.instanceId)}
+                onRightClick={(e) => {
+                  e.preventDefault();
                   if (window.confirm('Move to graveyard?')) {
                     const originalIndex = playerBattlefield.findIndex(c => c.instanceId === card.instanceId);
                     movePlayerCardToGraveyard(originalIndex, 'battlefield');
@@ -352,6 +413,9 @@ const GameBoard = ({ deck }) => {
         <div className="zone-controls">
           <button className="draw-btn" onClick={drawPlayerCard}>
             Draw Card
+          </button>
+          <button className="end-turn-btn" onClick={endPlayerTurn}>
+            End Turn
           </button>
           <button onClick={() => setShowPlayerGraveyard(!showPlayerGraveyard)}>
             Graveyard ({playerGraveyard.length})

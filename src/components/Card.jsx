@@ -1,13 +1,14 @@
 import React from 'react';
 import './Card.css';
 
-const Card = ({ card, onClick, isSmall }) => {
+const Card = ({ card, onClick, onRightClick, isSmall, isTapped }) => {
   if (!card) return null;
 
   return (
     <div
-      className={`card ${isSmall ? 'card-small' : ''}`}
+      className={`card ${isSmall ? 'card-small' : ''} ${isTapped ? 'card-tapped' : ''}`}
       onClick={onClick}
+      onContextMenu={onRightClick}
     >
       <div className="card-header">
         <div className="card-name">{card.name}</div>

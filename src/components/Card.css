@@ -20,6 +20,15 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
+.card-tapped {
+  transform: rotate(90deg);
+  margin: 40px 50px;
+}
+
+.card-tapped:hover {
+  transform: rotate(90deg) translateY(-4px);
+}
+
 .card-small {
   width: 120px;
   min-height: 168px;
