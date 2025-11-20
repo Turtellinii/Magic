@@ -93,6 +93,11 @@ const GameBoard = ({ deck }) => {
   const [showOpponentExile, setShowOpponentExile] = useState(false);
   const [showCardFinder, setShowCardFinder] = useState(false);
 
+  // Combat state
+  const [showCombatModal, setShowCombatModal] = useState(false);
+  const [attackingCard, setAttackingCard] = useState(null);
+  const [isPlayerAttacking, setIsPlayerAttacking] = useState(true);
+
   // Draw initial hands (7 cards each) when game starts
   useEffect(() => {
     // Draw 7 cards for player
@@ -163,41 +168,198 @@ const GameBoard = ({ deck }) => {
     return type.includes('Land');
   };
 
+  // Check if a card is a creature
+  const isCreatureCard = (card) => {
+    const type = card.type || '';
+    return type.includes('Creature');
+  };
+
   // Tap/untap card functions
   const tapPlayerCard = (cardInstanceId) => {
-    setPlayerBattlefield(playerBattlefield.map(card => {
-      if (card.instanceId === cardInstanceId) {
-        if (!card.tapped) {
-          // Tapping the card
-          if (isLandCard(card)) {
-            setPlayerMana(playerMana + 1);
-          }
-          return { ...card, tapped: true };
+    const card = playerBattlefield.find(c => c.instanceId === cardInstanceId);
+    if (!card || card.tapped) return;
+
+    // If it's a creature, show combat modal
+    if (isCreatureCard(card)) {
+      setAttackingCard(card);
+      setIsPlayerAttacking(true);
+      setShowCombatModal(true);
+      return;
+    }
+
+    // For non-creatures, just tap
+    setPlayerBattlefield(playerBattlefield.map(c => {
+      if (c.instanceId === cardInstanceId) {
+        if (isLandCard(c)) {
+          setPlayerMana(playerMana + 1);
         }
+        return { ...c, tapped: true };
       }
-      return card;
+      return c;
     }));
   };
 
   const tapOpponentCard = (cardInstanceId) => {
-    setOpponentBattlefield(opponentBattlefield.map(card => {
-      if (card.instanceId === cardInstanceId) {
-        if (!card.tapped) {
-          // Tapping the card
-          if (isLandCard(card)) {
-            setOpponentMana(opponentMana + 1);
-          }
-          return { ...card, tapped: true };
+    const card = opponentBattlefield.find(c => c.instanceId === cardInstanceId);
+    if (!card || card.tapped) return;
+
+    // If it's a creature, show combat modal
+    if (isCreatureCard(card)) {
+      setAttackingCard(card);
+      setIsPlayerAttacking(false);
+      setShowCombatModal(true);
+      return;
+    }
+
+    // For non-creatures, just tap
+    setOpponentBattlefield(opponentBattlefield.map(c => {
+      if (c.instanceId === cardInstanceId) {
+        if (isLandCard(c)) {
+          setOpponentMana(opponentMana + 1);
         }
+        return { ...c, tapped: true };
       }
-      return card;
+      return c;
     }));
+  };
+
+  // Combat resolution functions
+  const resolveCombat = (defenderCard) => {
+    if (!attackingCard) return;
+
+    const attackerPower = attackingCard.power || 0;
+    const defenderPower = defenderCard.power || 0;
+
+    // Tap the attacking creature
+    if (isPlayerAttacking) {
+      // Player is attacking opponent's creature
+      setPlayerBattlefield(playerBattlefield.map(c => {
+        if (c.instanceId === attackingCard.instanceId) {
+          return { ...c, tapped: true };
+        }
+        return c;
+      }));
+
+      // Apply damage to both creatures
+      setOpponentBattlefield(prev => {
+        const updated = prev.map(c => {
+          if (c.instanceId === defenderCard.instanceId) {
+            const currentToughness = c.currentToughness !== undefined ? c.currentToughness : c.toughness;
+            const newToughness = currentToughness - attackerPower;
+            return { ...c, currentToughness: newToughness };
+          }
+          return c;
+        });
+        // Remove dead creatures
+        const dead = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
+        dead.forEach(c => setOpponentGraveyard(prev => [...prev, c]));
+        return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
+      });
+
+      setPlayerBattlefield(prev => {
+        const updated = prev.map(c => {
+          if (c.instanceId === attackingCard.instanceId) {
+            const currentToughness = c.currentToughness !== undefined ? c.currentToughness : c.toughness;
+            const newToughness = currentToughness - defenderPower;
+            return { ...c, currentToughness: newToughness, tapped: true };
+          }
+          return c;
+        });
+        // Remove dead creatures
+        const dead = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
+        dead.forEach(c => setPlayerGraveyard(prev => [...prev, c]));
+        return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
+      });
+    } else {
+      // Opponent is attacking player's creature
+      setOpponentBattlefield(opponentBattlefield.map(c => {
+        if (c.instanceId === attackingCard.instanceId) {
+          return { ...c, tapped: true };
+        }
+        return c;
+      }));
+
+      // Apply damage to both creatures
+      setPlayerBattlefield(prev => {
+        const updated = prev.map(c => {
+          if (c.instanceId === defenderCard.instanceId) {
+            const currentToughness = c.currentToughness !== undefined ? c.currentToughness : c.toughness;
+            const newToughness = currentToughness - attackerPower;
+            return { ...c, currentToughness: newToughness };
+          }
+          return c;
+        });
+        // Remove dead creatures
+        const dead = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
+        dead.forEach(c => setPlayerGraveyard(prev => [...prev, c]));
+        return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
+      });
+
+      setOpponentBattlefield(prev => {
+        const updated = prev.map(c => {
+          if (c.instanceId === attackingCard.instanceId) {
+            const currentToughness = c.currentToughness !== undefined ? c.currentToughness : c.toughness;
+            const newToughness = currentToughness - defenderPower;
+            return { ...c, currentToughness: newToughness, tapped: true };
+          }
+          return c;
+        });
+        // Remove dead creatures
+        const dead = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
+        dead.forEach(c => setOpponentGraveyard(prev => [...prev, c]));
+        return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
+      });
+    }
+
+    // Close modal
+    setShowCombatModal(false);
+    setAttackingCard(null);
+  };
+
+  const attackOpponentDirectly = () => {
+    if (!attackingCard) return;
+
+    const attackerPower = attackingCard.power || 0;
+
+    // Tap the attacking creature
+    if (isPlayerAttacking) {
+      setPlayerBattlefield(playerBattlefield.map(c => {
+        if (c.instanceId === attackingCard.instanceId) {
+          return { ...c, tapped: true };
+        }
+        return c;
+      }));
+      // Deal damage to opponent's life
+      setOpponentLife(opponentLife - attackerPower);
+    } else {
+      setOpponentBattlefield(opponentBattlefield.map(c => {
+        if (c.instanceId === attackingCard.instanceId) {
+          return { ...c, tapped: true };
+        }
+        return c;
+      }));
+      // Deal damage to player's life
+      setPlayerLife(playerLife - attackerPower);
+    }
+
+    // Close modal
+    setShowCombatModal(false);
+    setAttackingCard(null);
+  };
+
+  const cancelCombat = () => {
+    setShowCombatModal(false);
+    setAttackingCard(null);
   };
 
   // End turn functions
   const endPlayerTurn = () => {
-    // Untap all player cards
-    setPlayerBattlefield(playerBattlefield.map(card => ({ ...card, tapped: false })));
+    // Untap all player cards and reset creature toughness
+    setPlayerBattlefield(playerBattlefield.map(card => ({
+      ...card,
+      tapped: false,
+      currentToughness: card.toughness // Reset to original toughness
+    })));
     // Reset mana
     setPlayerMana(0);
     // Opponent draws a card at the beginning of their turn
@@ -209,8 +371,12 @@ const GameBoard = ({ deck }) => {
   };
 
   const endOpponentTurn = () => {
-    // Untap all opponent cards
-    setOpponentBattlefield(opponentBattlefield.map(card => ({ ...card, tapped: false })));
+    // Untap all opponent cards and reset creature toughness
+    setOpponentBattlefield(opponentBattlefield.map(card => ({
+      ...card,
+      tapped: false,
+      currentToughness: card.toughness // Reset to original toughness
+    })));
     // Reset mana
     setOpponentMana(0);
     // Player draws a card at the beginning of their turn
@@ -539,6 +705,46 @@ const GameBoard = ({ deck }) => {
           </div>
         )}
       </div>
+
+      {/* Combat Modal */}
+      {showCombatModal && attackingCard && (
+        <div className="modal-overlay" onClick={cancelCombat}>
+          <div className="modal-content combat-modal" onClick={(e) => e.stopPropagation()}>
+            <h3>Combat - Select Target</h3>
+
+            <div className="combat-attacker">
+              <h4>Attacking with:</h4>
+              <Card card={attackingCard} isSmall />
+            </div>
+
+            <div className="combat-targets">
+              <h4>Select target:</h4>
+
+              {/* Opponent's creatures (if player attacking) or Player's creatures (if opponent attacking) */}
+              <div className="combat-creatures">
+                {(isPlayerAttacking ? opponentBattlefield : playerBattlefield)
+                  .filter(card => isCreatureCard(card))
+                  .map((card, index) => (
+                    <div key={index} className="combat-target-card" onClick={() => resolveCombat(card)}>
+                      <Card card={card} isSmall />
+                    </div>
+                  ))
+                }
+              </div>
+
+              {/* Attack opponent/player directly */}
+              <button
+                className="attack-directly-btn"
+                onClick={attackOpponentDirectly}
+              >
+                Attack {isPlayerAttacking ? 'Opponent' : 'Player'} Directly ({attackingCard.power} damage)
+              </button>
+            </div>
+
+            <button className="cancel-combat-btn" onClick={cancelCombat}>Cancel</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

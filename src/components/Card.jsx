@@ -72,8 +72,8 @@ const Card = ({ card, onClick, onRightClick, onEffectClick, isSmall, isTapped, o
       )}
 
       {(card.power !== undefined || card.toughness !== undefined) && (
-        <div className="card-stats">
-          {card.power}/{card.toughness}
+        <div className={`card-stats ${card.currentToughness !== undefined && card.currentToughness < card.toughness ? 'card-stats-damaged' : ''}`}>
+          {card.power}/{card.currentToughness !== undefined ? card.currentToughness : card.toughness}
         </div>
       )}
     </div>

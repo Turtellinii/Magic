@@ -237,3 +237,75 @@
 .modal-content button:hover {
   background: #a67c1a;
 }
+
+/* Combat Modal Styles */
+.combat-modal {
+  min-width: 500px;
+}
+
+.combat-attacker {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #8b6914;
+}
+
+.combat-attacker h4,
+.combat-targets h4 {
+  margin: 0 0 10px 0;
+  color: #f0e6d2;
+  font-size: 16px;
+}
+
+.combat-attacker .card {
+  display: inline-block;
+}
+
+.combat-targets {
+  margin-bottom: 20px;
+}
+
+.combat-creatures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+  min-height: 100px;
+}
+
+.combat-target-card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 10px;
+}
+
+.combat-target-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(231, 76, 60, 0.7);
+}
+
+.attack-directly-btn {
+  display: block;
+  width: 100%;
+  background: #c43a3a !important;
+  border: 2px solid #e74c3c !important;
+  padding: 15px 20px !important;
+  font-size: 16px !important;
+  margin-top: 10px;
+}
+
+.attack-directly-btn:hover {
+  background: #e74c3c !important;
+  box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+}
+
+.cancel-combat-btn {
+  margin-top: 15px !important;
+  background: #666 !important;
+  border-color: #888 !important;
+}
+
+.cancel-combat-btn:hover {
+  background: #888 !important;
+}
