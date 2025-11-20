@@ -123,12 +123,36 @@ const GameBoard = ({ deck }) => {
 
   const playCardFromPlayerHand = (cardIndex) => {
     const card = playerHand[cardIndex];
+    const manaCost = card.cost || 0;
+
+    // Check if player has enough mana
+    if (manaCost > playerMana) {
+      alert(`Not enough mana! This card costs ${manaCost} mana, but you only have ${playerMana}.`);
+      return;
+    }
+
+    // Deduct mana cost
+    setPlayerMana(playerMana - manaCost);
+
+    // Play the card
     setPlayerBattlefield([...playerBattlefield, { ...card, tapped: false }]);
     setPlayerHand(playerHand.filter((_, i) => i !== cardIndex));
   };
 
   const playCardFromOpponentHand = (cardIndex) => {
     const card = opponentHand[cardIndex];
+    const manaCost = card.cost || 0;
+
+    // Check if opponent has enough mana
+    if (manaCost > opponentMana) {
+      alert(`Not enough mana! This card costs ${manaCost} mana, but opponent only has ${opponentMana}.`);
+      return;
+    }
+
+    // Deduct mana cost
+    setOpponentMana(opponentMana - manaCost);
+
+    // Play the card
     setOpponentBattlefield([...opponentBattlefield, { ...card, tapped: false }]);
     setOpponentHand(opponentHand.filter((_, i) => i !== cardIndex));
   };
