@@ -11,9 +11,19 @@ const Card = ({ card, onClick, onRightClick, onEffectClick, isSmall, isTapped, o
     }
   };
 
+  // Cards with longer text that need smaller font
+  const cardsWithSmallText = [
+    'Gurukul Weapons Master',
+    'Rani Lakshmibai',
+    'Akbar the philosopher king',
+    'Tipu Sultan',
+    'Mahatma Gandhi'
+  ];
+  const hasSmallText = cardsWithSmallText.includes(card.name);
+
   return (
     <div
-      className={`card ${isSmall ? 'card-small' : ''} ${isTapped ? 'card-tapped' : ''}`}
+      className={`card ${isSmall ? 'card-small' : ''} ${isTapped ? 'card-tapped' : ''} ${hasSmallText ? 'card-small-text' : ''}`}
       onClick={onClick}
       onContextMenu={onRightClick}
     >

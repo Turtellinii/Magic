@@ -98,6 +98,9 @@ const GameBoard = ({ deck }) => {
   const [attackingCard, setAttackingCard] = useState(null);
   const [isPlayerAttacking, setIsPlayerAttacking] = useState(true);
 
+  // Turn tracking
+  const [currentTurn, setCurrentTurn] = useState('player'); // 'player' or 'opponent'
+
   // Draw initial hands (7 cards each) when game starts
   useEffect(() => {
     // Draw 7 cards for player
@@ -230,17 +233,12 @@ const GameBoard = ({ deck }) => {
     const attackerPower = attackingCard.power || 0;
     const defenderPower = defenderCard.power || 0;
 
-    // Tap the attacking creature
     if (isPlayerAttacking) {
       // Player is attacking opponent's creature
-      setPlayerBattlefield(playerBattlefield.map(c => {
-        if (c.instanceId === attackingCard.instanceId) {
-          return { ...c, tapped: true };
-        }
-        return c;
-      }));
+      let deadDefenders = [];
+      let deadAttackers = [];
 
-      // Apply damage to both creatures
+      // Apply damage to defender
       setOpponentBattlefield(prev => {
         const updated = prev.map(c => {
           if (c.instanceId === defenderCard.instanceId) {
@@ -250,12 +248,15 @@ const GameBoard = ({ deck }) => {
           }
           return c;
         });
-        // Remove dead creatures
-        const dead = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
-        dead.forEach(c => setOpponentGraveyard(prev => [...prev, c]));
+        // Collect dead creatures
+        deadDefenders = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
+        if (deadDefenders.length > 0) {
+          setOpponentGraveyard(prevGrave => [...prevGrave, ...deadDefenders]);
+        }
         return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
       });
 
+      // Apply damage to attacker
       setPlayerBattlefield(prev => {
         const updated = prev.map(c => {
           if (c.instanceId === attackingCard.instanceId) {
@@ -265,21 +266,19 @@ const GameBoard = ({ deck }) => {
           }
           return c;
         });
-        // Remove dead creatures
-        const dead = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
-        dead.forEach(c => setPlayerGraveyard(prev => [...prev, c]));
+        // Collect dead creatures
+        deadAttackers = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
+        if (deadAttackers.length > 0) {
+          setPlayerGraveyard(prevGrave => [...prevGrave, ...deadAttackers]);
+        }
         return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
       });
     } else {
       // Opponent is attacking player's creature
-      setOpponentBattlefield(opponentBattlefield.map(c => {
-        if (c.instanceId === attackingCard.instanceId) {
-          return { ...c, tapped: true };
-        }
-        return c;
-      }));
+      let deadDefenders = [];
+      let deadAttackers = [];
 
-      // Apply damage to both creatures
+      // Apply damage to defender
       setPlayerBattlefield(prev => {
         const updated = prev.map(c => {
           if (c.instanceId === defenderCard.instanceId) {
@@ -289,12 +288,15 @@ const GameBoard = ({ deck }) => {
           }
           return c;
         });
-        // Remove dead creatures
-        const dead = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
-        dead.forEach(c => setPlayerGraveyard(prev => [...prev, c]));
+        // Collect dead creatures
+        deadDefenders = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
+        if (deadDefenders.length > 0) {
+          setPlayerGraveyard(prevGrave => [...prevGrave, ...deadDefenders]);
+        }
         return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
       });
 
+      // Apply damage to attacker
       setOpponentBattlefield(prev => {
         const updated = prev.map(c => {
           if (c.instanceId === attackingCard.instanceId) {
@@ -304,9 +306,11 @@ const GameBoard = ({ deck }) => {
           }
           return c;
         });
-        // Remove dead creatures
-        const dead = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
-        dead.forEach(c => setOpponentGraveyard(prev => [...prev, c]));
+        // Collect dead creatures
+        deadAttackers = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
+        if (deadAttackers.length > 0) {
+          setOpponentGraveyard(prevGrave => [...prevGrave, ...deadAttackers]);
+        }
         return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
       });
     }
@@ -368,6 +372,8 @@ const GameBoard = ({ deck }) => {
       setOpponentHand([...opponentHand, { ...card, instanceId: Date.now() }]);
       setOpponentDeck(opponentDeck.slice(1));
     }
+    // Switch to opponent's turn
+    setCurrentTurn('opponent');
   };
 
   const endOpponentTurn = () => {
@@ -385,6 +391,8 @@ const GameBoard = ({ deck }) => {
       setPlayerHand([...playerHand, { ...card, instanceId: Date.now() }]);
       setPlayerDeck(playerDeck.slice(1));
     }
+    // Switch to player's turn
+    setCurrentTurn('player');
   };
 
   // Effect click handler (taps the card for now, will be expanded later)
@@ -508,7 +516,11 @@ const GameBoard = ({ deck }) => {
           <button className="draw-btn" onClick={drawOpponentCard}>
             Draw Card
           </button>
-          <button className="end-turn-btn" onClick={endOpponentTurn}>
+          <button
+            className="end-turn-btn"
+            onClick={endOpponentTurn}
+            disabled={currentTurn !== 'opponent'}
+          >
             End Turn
           </button>
           <button onClick={() => setShowOpponentGraveyard(!showOpponentGraveyard)}>
@@ -650,7 +662,11 @@ const GameBoard = ({ deck }) => {
           <button className="draw-btn" onClick={drawPlayerCard}>
             Draw Card
           </button>
-          <button className="end-turn-btn" onClick={endPlayerTurn}>
+          <button
+            className="end-turn-btn"
+            onClick={endPlayerTurn}
+            disabled={currentTurn !== 'player'}
+          >
             End Turn
           </button>
           <button onClick={() => setShowPlayerGraveyard(!showPlayerGraveyard)}>

@@ -127,6 +127,20 @@
   box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
 }
 
+.end-turn-btn:disabled {
+  background: #666 !important;
+  border-color: #888 !important;
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.end-turn-btn:disabled:hover {
+  background: #666 !important;
+  transform: none;
+  box-shadow: none;
+}
+
 .deck-info {
   color: #f0e6d2;
   font-weight: bold;
