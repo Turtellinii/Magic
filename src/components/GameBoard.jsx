@@ -101,6 +101,22 @@ const GameBoard = ({ deck }) => {
   // Turn tracking
   const [currentTurn, setCurrentTurn] = useState('player'); // 'player' or 'opponent'
 
+  // Card effect state
+  const [playerCreatureDiedThisTurn, setPlayerCreatureDiedThisTurn] = useState(false);
+  const [opponentCreatureDiedThisTurn, setOpponentCreatureDiedThisTurn] = useState(false);
+  const [playerNextCreatureHasHaste, setPlayerNextCreatureHasHaste] = useState(false);
+  const [opponentNextCreatureHasHaste, setOpponentNextCreatureHasHaste] = useState(false);
+  const [playerEffectsUsed, setPlayerEffectsUsed] = useState({}); // Track once-per-game effects by card instanceId
+  const [opponentEffectsUsed, setOpponentEffectsUsed] = useState({});
+  const [playerDelayedEffects, setPlayerDelayedEffects] = useState([]); // [{card, turnsRemaining, action}]
+  const [opponentDelayedEffects, setOpponentDelayedEffects] = useState([]);
+
+  // Effect activation modals
+  const [showEffectModal, setShowEffectModal] = useState(false);
+  const [effectModalType, setEffectModalType] = useState(''); // 'varanasi-exile', 'himalayas-sacrifice', 'rameswaram-exile'
+  const [effectSourceCard, setEffectSourceCard] = useState(null);
+  const [effectIsPlayer, setEffectIsPlayer] = useState(true);
+
   // Draw initial hands (7 cards each) when game starts
   useEffect(() => {
     // Draw 7 cards for player
@@ -142,13 +158,25 @@ const GameBoard = ({ deck }) => {
     // Deduct mana cost
     setPlayerMana(playerMana - manaCost);
 
+    // Check for Rameswaram Bridge ETB effect
+    if (card.name === 'Rameswaram Bridge (a.k.a. Ram Setu)') {
+      setPlayerNextCreatureHasHaste(true);
+    }
+
     // Play the card - add summoning sickness to creatures without Haste
     const isCreature = isCreatureCard(card);
+    const hasHasteAbility = hasHaste(card) || (isCreature && playerNextCreatureHasHaste);
     const cardWithState = {
       ...card,
       tapped: false,
-      summoningSickness: isCreature && !hasHaste(card)
+      summoningSickness: isCreature && !hasHasteAbility
     };
+
+    // If creature was given haste from Rameswaram Bridge, reset the flag
+    if (isCreature && playerNextCreatureHasHaste) {
+      setPlayerNextCreatureHasHaste(false);
+    }
+
     setPlayerBattlefield([...playerBattlefield, cardWithState]);
     setPlayerHand(playerHand.filter((_, i) => i !== cardIndex));
   };
@@ -166,13 +194,25 @@ const GameBoard = ({ deck }) => {
     // Deduct mana cost
     setOpponentMana(opponentMana - manaCost);
 
+    // Check for Rameswaram Bridge ETB effect
+    if (card.name === 'Rameswaram Bridge (a.k.a. Ram Setu)') {
+      setOpponentNextCreatureHasHaste(true);
+    }
+
     // Play the card - add summoning sickness to creatures without Haste
     const isCreature = isCreatureCard(card);
+    const hasHasteAbility = hasHaste(card) || (isCreature && opponentNextCreatureHasHaste);
     const cardWithState = {
       ...card,
       tapped: false,
-      summoningSickness: isCreature && !hasHaste(card)
+      summoningSickness: isCreature && !hasHasteAbility
     };
+
+    // If creature was given haste from Rameswaram Bridge, reset the flag
+    if (isCreature && opponentNextCreatureHasHaste) {
+      setOpponentNextCreatureHasHaste(false);
+    }
+
     setOpponentBattlefield([...opponentBattlefield, cardWithState]);
     setOpponentHand(opponentHand.filter((_, i) => i !== cardIndex));
   };
@@ -218,7 +258,12 @@ const GameBoard = ({ deck }) => {
     setPlayerBattlefield(playerBattlefield.map(c => {
       if (c.instanceId === cardInstanceId) {
         if (isLandCard(c)) {
-          setPlayerMana(playerMana + 1);
+          // Varanasi, Eternal City: If a creature died this turn, add 2 mana instead of 1
+          if (c.name === 'Varanasi, Eternal City' && playerCreatureDiedThisTurn) {
+            setPlayerMana(playerMana + 2);
+          } else {
+            setPlayerMana(playerMana + 1);
+          }
         }
         return { ...c, tapped: true };
       }
@@ -248,7 +293,12 @@ const GameBoard = ({ deck }) => {
     setOpponentBattlefield(opponentBattlefield.map(c => {
       if (c.instanceId === cardInstanceId) {
         if (isLandCard(c)) {
-          setOpponentMana(opponentMana + 1);
+          // Varanasi, Eternal City: If a creature died this turn, add 2 mana instead of 1
+          if (c.name === 'Varanasi, Eternal City' && opponentCreatureDiedThisTurn) {
+            setOpponentMana(opponentMana + 2);
+          } else {
+            setOpponentMana(opponentMana + 1);
+          }
         }
         return { ...c, tapped: true };
       }
@@ -262,6 +312,8 @@ const GameBoard = ({ deck }) => {
 
     const attackerPower = attackingCard.power || 0;
     const defenderPower = defenderCard.power || 0;
+    let playerCreatureDied = false;
+    let opponentCreatureDied = false;
 
     if (isPlayerAttacking) {
       // Player is attacking opponent's creature
@@ -282,6 +334,8 @@ const GameBoard = ({ deck }) => {
         deadDefenders = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
         if (deadDefenders.length > 0) {
           setOpponentGraveyard(prevGrave => [...prevGrave, ...deadDefenders]);
+          opponentCreatureDied = true;
+          setOpponentCreatureDiedThisTurn(true);
         }
         return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
       });
@@ -300,6 +354,13 @@ const GameBoard = ({ deck }) => {
         deadAttackers = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
         if (deadAttackers.length > 0) {
           setPlayerGraveyard(prevGrave => [...prevGrave, ...deadAttackers]);
+          playerCreatureDied = true;
+          setPlayerCreatureDiedThisTurn(true);
+          // If player creature died and Varanasi is already tapped, give 1 mana
+          const varanasi = playerBattlefield.find(c => c.name === 'Varanasi, Eternal City' && c.tapped);
+          if (varanasi) {
+            setPlayerMana(prevMana => prevMana + 1);
+          }
         }
         return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
       });
@@ -322,6 +383,13 @@ const GameBoard = ({ deck }) => {
         deadDefenders = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
         if (deadDefenders.length > 0) {
           setPlayerGraveyard(prevGrave => [...prevGrave, ...deadDefenders]);
+          playerCreatureDied = true;
+          setPlayerCreatureDiedThisTurn(true);
+          // If player creature died and Varanasi is already tapped, give 1 mana
+          const varanasi = playerBattlefield.find(c => c.name === 'Varanasi, Eternal City' && c.tapped);
+          if (varanasi) {
+            setPlayerMana(prevMana => prevMana + 1);
+          }
         }
         return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
       });
@@ -340,6 +408,13 @@ const GameBoard = ({ deck }) => {
         deadAttackers = updated.filter(c => c.currentToughness !== undefined && c.currentToughness <= 0);
         if (deadAttackers.length > 0) {
           setOpponentGraveyard(prevGrave => [...prevGrave, ...deadAttackers]);
+          opponentCreatureDied = true;
+          setOpponentCreatureDiedThisTurn(true);
+          // If opponent creature died and Varanasi is already tapped, give 1 mana
+          const varanasi = opponentBattlefield.find(c => c.name === 'Varanasi, Eternal City' && c.tapped);
+          if (varanasi) {
+            setOpponentMana(prevMana => prevMana + 1);
+          }
         }
         return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
       });
@@ -397,6 +472,24 @@ const GameBoard = ({ deck }) => {
     })));
     // Reset mana
     setPlayerMana(0);
+    // Reset creature died flag
+    setPlayerCreatureDiedThisTurn(false);
+    // Process delayed effects
+    setPlayerDelayedEffects(prev => {
+      const updated = prev.map(effect => ({
+        ...effect,
+        turnsRemaining: effect.turnsRemaining - 1
+      }));
+      // Execute effects with 0 turns remaining
+      updated.filter(effect => effect.turnsRemaining === 0).forEach(effect => {
+        if (effect.action === 'return-to-battlefield') {
+          setPlayerBattlefield(prevBf => [...prevBf, { ...effect.card, instanceId: Date.now() }]);
+          setPlayerExile(prevExile => prevExile.filter(c => c.instanceId !== effect.card.instanceId));
+        }
+      });
+      // Return effects with turns remaining
+      return updated.filter(effect => effect.turnsRemaining > 0);
+    });
     // Opponent draws a card at the beginning of their turn
     if (opponentDeck.length > 0) {
       const card = opponentDeck[0];
@@ -417,6 +510,24 @@ const GameBoard = ({ deck }) => {
     })));
     // Reset mana
     setOpponentMana(0);
+    // Reset creature died flag
+    setOpponentCreatureDiedThisTurn(false);
+    // Process delayed effects
+    setOpponentDelayedEffects(prev => {
+      const updated = prev.map(effect => ({
+        ...effect,
+        turnsRemaining: effect.turnsRemaining - 1
+      }));
+      // Execute effects with 0 turns remaining
+      updated.filter(effect => effect.turnsRemaining === 0).forEach(effect => {
+        if (effect.action === 'return-to-battlefield') {
+          setOpponentBattlefield(prevBf => [...prevBf, { ...effect.card, instanceId: Date.now() }]);
+          setOpponentExile(prevExile => prevExile.filter(c => c.instanceId !== effect.card.instanceId));
+        }
+      });
+      // Return effects with turns remaining
+      return updated.filter(effect => effect.turnsRemaining > 0);
+    });
     // Player draws a card at the beginning of their turn
     if (playerDeck.length > 0) {
       const card = playerDeck[0];
@@ -427,15 +538,193 @@ const GameBoard = ({ deck }) => {
     setCurrentTurn('player');
   };
 
-  // Effect click handler (taps the card for now, will be expanded later)
+  // Card-specific effect handlers
+  const handleVaranasiExile = (card, isPlayer) => {
+    // Check if effect has been used
+    const effectsUsed = isPlayer ? playerEffectsUsed : opponentEffectsUsed;
+    const effectKey = `${card.instanceId}_varanasi_exile`;
+
+    if (effectsUsed[effectKey]) {
+      alert('Effect already used!');
+      return;
+    }
+
+    // Open modal to select graveyard card
+    setEffectSourceCard(card);
+    setEffectIsPlayer(isPlayer);
+    setEffectModalType('varanasi-exile');
+    setShowEffectModal(true);
+  };
+
+  const handleHimalayasSacrifice = (card, isPlayer) => {
+    // Open modal to select creature to sacrifice
+    setEffectSourceCard(card);
+    setEffectIsPlayer(isPlayer);
+    setEffectModalType('himalayas-sacrifice');
+    setShowEffectModal(true);
+  };
+
+  const handleRameswaramExile = (card, isPlayer) => {
+    // Open modal to select opponent's artifact or creature
+    setEffectSourceCard(card);
+    setEffectIsPlayer(isPlayer);
+    setEffectModalType('rameswaram-exile');
+    setShowEffectModal(true);
+  };
+
+  // Effect click handler
   const handlePlayerEffectClick = (cardInstanceId, effectIndex) => {
-    // For now, just tap the card when an effect is clicked
-    tapPlayerCard(cardInstanceId);
+    const card = playerBattlefield.find(c => c.instanceId === cardInstanceId);
+    if (!card) return;
+
+    // Route to specific card effect handler
+    if (card.name === 'Varanasi, Eternal City' && effectIndex === 3) {
+      handleVaranasiExile(card, true);
+    } else if (card.name === 'Himalayas, Throne of the Gods' && effectIndex === 2) {
+      handleHimalayasSacrifice(card, true);
+    } else if (card.name === 'Rameswaram Bridge (a.k.a. Ram Setu)' && effectIndex === 3) {
+      handleRameswaramExile(card, true);
+    } else {
+      // Default: just tap the card
+      tapPlayerCard(cardInstanceId);
+    }
   };
 
   const handleOpponentEffectClick = (cardInstanceId, effectIndex) => {
-    // For now, just tap the card when an effect is clicked
-    tapOpponentCard(cardInstanceId);
+    const card = opponentBattlefield.find(c => c.instanceId === cardInstanceId);
+    if (!card) return;
+
+    // Route to specific card effect handler
+    if (card.name === 'Varanasi, Eternal City' && effectIndex === 3) {
+      handleVaranasiExile(card, false);
+    } else if (card.name === 'Himalayas, Throne of the Gods' && effectIndex === 2) {
+      handleHimalayasSacrifice(card, false);
+    } else if (card.name === 'Rameswaram Bridge (a.k.a. Ram Setu)' && effectIndex === 3) {
+      handleRameswaramExile(card, false);
+    } else {
+      // Default: just tap the card
+      tapOpponentCard(cardInstanceId);
+    }
+  };
+
+  // Effect completion handlers
+  const completeVaranasiExile = (selectedCard) => {
+    if (!effectSourceCard) return;
+
+    const isPlayer = effectIsPlayer;
+    const graveyard = isPlayer ? playerGraveyard : opponentGraveyard;
+    const setGraveyard = isPlayer ? setPlayerGraveyard : setOpponentGraveyard;
+    const setExile = isPlayer ? setPlayerExile : setOpponentExile;
+    const setHand = isPlayer ? setPlayerHand : setOpponentHand;
+    const hand = isPlayer ? playerHand : opponentHand;
+    const setLife = isPlayer ? setPlayerLife : setOpponentLife;
+    const life = isPlayer ? playerLife : opponentLife;
+    const deck = isPlayer ? playerDeck : opponentDeck;
+    const setDeck = isPlayer ? setPlayerDeck : setOpponentDeck;
+    const setEffectsUsed = isPlayer ? setPlayerEffectsUsed : setOpponentEffectsUsed;
+    const battlefield = isPlayer ? playerBattlefield : opponentBattlefield;
+    const setBattlefield = isPlayer ? setPlayerBattlefield : setOpponentBattlefield;
+
+    // Move card from graveyard to exile
+    setGraveyard(graveyard.filter(c => c.instanceId !== selectedCard.instanceId));
+    setExile(prev => [...prev, selectedCard]);
+
+    // Draw a card
+    if (deck.length > 0) {
+      const newCard = deck[0];
+      setHand([...hand, { ...newCard, instanceId: Date.now() }]);
+      setDeck(deck.slice(1));
+    }
+
+    // Gain 3 life
+    setLife(life + 3);
+
+    // Mark effect as used
+    const effectKey = `${effectSourceCard.instanceId}_varanasi_exile`;
+    setEffectsUsed(prev => ({ ...prev, [effectKey]: true }));
+
+    // Tap the card
+    setBattlefield(battlefield.map(c =>
+      c.instanceId === effectSourceCard.instanceId ? { ...c, tapped: true } : c
+    ));
+
+    // Close modal
+    setShowEffectModal(false);
+    setEffectSourceCard(null);
+  };
+
+  const completeHimalayasSacrifice = (selectedCreature) => {
+    if (!effectSourceCard) return;
+
+    const isPlayer = effectIsPlayer;
+    const battlefield = isPlayer ? playerBattlefield : opponentBattlefield;
+    const setBattlefield = isPlayer ? setPlayerBattlefield : setOpponentBattlefield;
+    const setGraveyard = isPlayer ? setPlayerGraveyard : setOpponentGraveyard;
+    const graveyard = isPlayer ? playerGraveyard : opponentGraveyard;
+    const deck = isPlayer ? playerDeck : opponentDeck;
+    const setDeck = isPlayer ? setPlayerDeck : setOpponentDeck;
+    const setHand = isPlayer ? setPlayerHand : setOpponentHand;
+    const hand = isPlayer ? playerHand : opponentHand;
+
+    // Move creature to graveyard
+    setBattlefield(battlefield.filter(c => c.instanceId !== selectedCreature.instanceId));
+    setGraveyard([...graveyard, selectedCreature]);
+
+    // Search deck for Spirit or God creature
+    const spiritOrGod = deck.find(c => {
+      const type = (c.type || '').toLowerCase();
+      return (type.includes('creature') && (type.includes('spirit') || type.includes('god')));
+    });
+
+    if (spiritOrGod) {
+      // Add to hand
+      setHand([...hand, { ...spiritOrGod, instanceId: Date.now() }]);
+      // Remove from deck
+      setDeck(deck.filter(c => c.id !== spiritOrGod.id));
+    } else {
+      alert('No Spirit or God creature found in deck!');
+    }
+
+    // Tap and sacrifice Himalayas
+    setBattlefield(prev => prev.filter(c => c.instanceId !== effectSourceCard.instanceId));
+    setGraveyard(prev => [...prev, effectSourceCard]);
+
+    // Close modal
+    setShowEffectModal(false);
+    setEffectSourceCard(null);
+  };
+
+  const completeRameswaramExile = (selectedCard) => {
+    if (!effectSourceCard) return;
+
+    const isPlayer = effectIsPlayer;
+    const opponentBf = isPlayer ? opponentBattlefield : playerBattlefield;
+    const setOpponentBf = isPlayer ? setOpponentBattlefield : setPlayerBattlefield;
+    const battlefield = isPlayer ? playerBattlefield : opponentBattlefield;
+    const setBattlefield = isPlayer ? setPlayerBattlefield : setOpponentBattlefield;
+    const setGraveyard = isPlayer ? setPlayerGraveyard : setOpponentGraveyard;
+    const graveyard = isPlayer ? playerGraveyard : opponentGraveyard;
+    const setExile = isPlayer ? setPlayerExile : setOpponentExile;
+    const setDelayedEffects = isPlayer ? setPlayerDelayedEffects : setOpponentDelayedEffects;
+
+    // Remove target from opponent's battlefield and exile it
+    setOpponentBf(opponentBf.filter(c => c.instanceId !== selectedCard.instanceId));
+    setExile(prev => [...prev, selectedCard]);
+
+    // Sacrifice Rameswaram Bridge
+    setBattlefield(battlefield.filter(c => c.instanceId !== effectSourceCard.instanceId));
+    setGraveyard([...graveyard, effectSourceCard]);
+
+    // Add delayed effect to return card after 2 turns
+    setDelayedEffects(prev => [...prev, {
+      card: selectedCard,
+      turnsRemaining: 2,
+      action: 'return-to-battlefield'
+    }]);
+
+    // Close modal
+    setShowEffectModal(false);
+    setEffectSourceCard(null);
   };
 
   const movePlayerCardToGraveyard = (cardIndex, fromZone) => {
@@ -790,6 +1079,67 @@ const GameBoard = ({ deck }) => {
             </div>
 
             <button className="cancel-combat-btn" onClick={cancelCombat}>Cancel</button>
+          </div>
+        </div>
+      )}
+
+      {/* Effect Modals */}
+      {showEffectModal && (
+        <div className="modal-overlay" onClick={() => setShowEffectModal(false)}>
+          <div className="modal-content effect-modal" onClick={(e) => e.stopPropagation()}>
+            {effectModalType === 'varanasi-exile' && (
+              <>
+                <h3>Varanasi, Eternal City - Exile Card from Graveyard</h3>
+                <p>Select a card from your graveyard to exile. You will draw a card and gain 3 life.</p>
+                <div className="card-grid">
+                  {(effectIsPlayer ? playerGraveyard : opponentGraveyard).map((card, index) => (
+                    <div key={index} className="selectable-card" onClick={() => completeVaranasiExile(card)}>
+                      <Card card={card} isSmall />
+                    </div>
+                  ))}
+                </div>
+                <button onClick={() => setShowEffectModal(false)}>Cancel</button>
+              </>
+            )}
+
+            {effectModalType === 'himalayas-sacrifice' && (
+              <>
+                <h3>Himalayas, Throne of the Gods - Sacrifice Creature</h3>
+                <p>Select a creature to sacrifice. You will search your deck for a Spirit or God creature.</p>
+                <div className="card-grid">
+                  {(effectIsPlayer ? playerBattlefield : opponentBattlefield)
+                    .filter(card => isCreatureCard(card))
+                    .map((card, index) => (
+                      <div key={index} className="selectable-card" onClick={() => completeHimalayasSacrifice(card)}>
+                        <Card card={card} isSmall />
+                      </div>
+                    ))
+                  }
+                </div>
+                <button onClick={() => setShowEffectModal(false)}>Cancel</button>
+              </>
+            )}
+
+            {effectModalType === 'rameswaram-exile' && (
+              <>
+                <h3>Rameswaram Bridge - Exile Target</h3>
+                <p>Select an opponent's artifact or creature to exile. It will return to your battlefield after 2 turns.</p>
+                <div className="card-grid">
+                  {(effectIsPlayer ? opponentBattlefield : playerBattlefield)
+                    .filter(card => {
+                      const type = (card.type || '').toLowerCase();
+                      return type.includes('artifact') || type.includes('creature');
+                    })
+                    .map((card, index) => (
+                      <div key={index} className="selectable-card" onClick={() => completeRameswaramExile(card)}>
+                        <Card card={card} isSmall />
+                      </div>
+                    ))
+                  }
+                </div>
+                <button onClick={() => setShowEffectModal(false)}>Cancel</button>
+              </>
+            )}
           </div>
         </div>
       )}

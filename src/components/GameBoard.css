@@ -323,3 +323,31 @@
 .cancel-combat-btn:hover {
   background: #888 !important;
 }
+
+/* Effect Modal Styles */
+.effect-modal {
+  min-width: 600px;
+  max-width: 800px;
+}
+
+.effect-modal h3 {
+  margin-bottom: 10px;
+  color: #f0e6d2;
+}
+
+.effect-modal p {
+  color: #d4c5a9;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.selectable-card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 10px;
+}
+
+.selectable-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+}
