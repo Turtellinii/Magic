@@ -142,8 +142,14 @@ const GameBoard = ({ deck }) => {
     // Deduct mana cost
     setPlayerMana(playerMana - manaCost);
 
-    // Play the card
-    setPlayerBattlefield([...playerBattlefield, { ...card, tapped: false }]);
+    // Play the card - add summoning sickness to creatures without Haste
+    const isCreature = isCreatureCard(card);
+    const cardWithState = {
+      ...card,
+      tapped: false,
+      summoningSickness: isCreature && !hasHaste(card)
+    };
+    setPlayerBattlefield([...playerBattlefield, cardWithState]);
     setPlayerHand(playerHand.filter((_, i) => i !== cardIndex));
   };
 
@@ -160,8 +166,14 @@ const GameBoard = ({ deck }) => {
     // Deduct mana cost
     setOpponentMana(opponentMana - manaCost);
 
-    // Play the card
-    setOpponentBattlefield([...opponentBattlefield, { ...card, tapped: false }]);
+    // Play the card - add summoning sickness to creatures without Haste
+    const isCreature = isCreatureCard(card);
+    const cardWithState = {
+      ...card,
+      tapped: false,
+      summoningSickness: isCreature && !hasHaste(card)
+    };
+    setOpponentBattlefield([...opponentBattlefield, cardWithState]);
     setOpponentHand(opponentHand.filter((_, i) => i !== cardIndex));
   };
 
@@ -177,10 +189,22 @@ const GameBoard = ({ deck }) => {
     return type.includes('Creature');
   };
 
+  // Check if a card has Haste
+  const hasHaste = (card) => {
+    const effects = [card.effect1, card.effect2, card.effect3, card.effect4, card.effect5];
+    return effects.some(effect => effect && effect.toLowerCase().includes('haste'));
+  };
+
   // Tap/untap card functions
   const tapPlayerCard = (cardInstanceId) => {
     const card = playerBattlefield.find(c => c.instanceId === cardInstanceId);
     if (!card || card.tapped) return;
+
+    // Check for summoning sickness
+    if (card.summoningSickness) {
+      alert('This creature has summoning sickness and cannot be used this turn!');
+      return;
+    }
 
     // If it's a creature, show combat modal
     if (isCreatureCard(card)) {
@@ -205,6 +229,12 @@ const GameBoard = ({ deck }) => {
   const tapOpponentCard = (cardInstanceId) => {
     const card = opponentBattlefield.find(c => c.instanceId === cardInstanceId);
     if (!card || card.tapped) return;
+
+    // Check for summoning sickness
+    if (card.summoningSickness) {
+      alert('This creature has summoning sickness and cannot be used this turn!');
+      return;
+    }
 
     // If it's a creature, show combat modal
     if (isCreatureCard(card)) {
@@ -358,11 +388,12 @@ const GameBoard = ({ deck }) => {
 
   // End turn functions
   const endPlayerTurn = () => {
-    // Untap all player cards and reset creature toughness
+    // Untap all player cards, reset creature toughness, and remove summoning sickness
     setPlayerBattlefield(playerBattlefield.map(card => ({
       ...card,
       tapped: false,
-      currentToughness: card.toughness // Reset to original toughness
+      currentToughness: card.toughness, // Reset to original toughness
+      summoningSickness: false // Remove summoning sickness
     })));
     // Reset mana
     setPlayerMana(0);
@@ -377,11 +408,12 @@ const GameBoard = ({ deck }) => {
   };
 
   const endOpponentTurn = () => {
-    // Untap all opponent cards and reset creature toughness
+    // Untap all opponent cards, reset creature toughness, and remove summoning sickness
     setOpponentBattlefield(opponentBattlefield.map(card => ({
       ...card,
       tapped: false,
-      currentToughness: card.toughness // Reset to original toughness
+      currentToughness: card.toughness, // Reset to original toughness
+      summoningSickness: false // Remove summoning sickness
     })));
     // Reset mana
     setOpponentMana(0);

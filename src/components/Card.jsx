@@ -23,7 +23,7 @@ const Card = ({ card, onClick, onRightClick, onEffectClick, isSmall, isTapped, o
 
   return (
     <div
-      className={`card ${isSmall ? 'card-small' : ''} ${isTapped ? 'card-tapped' : ''} ${hasSmallText ? 'card-small-text' : ''}`}
+      className={`card ${isSmall ? 'card-small' : ''} ${isTapped ? 'card-tapped' : ''} ${hasSmallText ? 'card-small-text' : ''} ${card.summoningSickness ? 'card-summoning-sickness' : ''}`}
       onClick={onClick}
       onContextMenu={onRightClick}
     >
