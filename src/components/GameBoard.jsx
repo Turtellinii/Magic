@@ -482,20 +482,25 @@ const GameBoard = ({ deck }) => {
     // Reset creature died flag
     setPlayerCreatureDiedThisTurn(false);
     // Process delayed effects
+    const triggeredEffects = [];
     setPlayerDelayedEffects(prev => {
       const updated = prev.map(effect => ({
         ...effect,
         turnsRemaining: effect.turnsRemaining - 1
       }));
-      // Execute effects with 0 turns remaining
+      // Collect effects that should trigger
       updated.filter(effect => effect.turnsRemaining === 0).forEach(effect => {
-        if (effect.action === 'return-to-battlefield') {
-          setPlayerBattlefield(prevBf => [...prevBf, { ...effect.card, instanceId: Date.now() }]);
-          setPlayerExile(prevExile => prevExile.filter(c => c.instanceId !== effect.card.instanceId));
-        }
+        triggeredEffects.push(effect);
       });
       // Return effects with turns remaining
       return updated.filter(effect => effect.turnsRemaining > 0);
+    });
+    // Execute triggered effects outside of state update
+    triggeredEffects.forEach(effect => {
+      if (effect.action === 'return-to-battlefield') {
+        setPlayerBattlefield(prevBf => [...prevBf, { ...effect.card, instanceId: Date.now() }]);
+        setPlayerExile(prevExile => prevExile.filter(c => c.instanceId !== effect.card.instanceId));
+      }
     });
     // Opponent draws a card at the beginning of their turn
     if (opponentDeck.length > 0) {
@@ -520,20 +525,25 @@ const GameBoard = ({ deck }) => {
     // Reset creature died flag
     setOpponentCreatureDiedThisTurn(false);
     // Process delayed effects
+    const triggeredEffects = [];
     setOpponentDelayedEffects(prev => {
       const updated = prev.map(effect => ({
         ...effect,
         turnsRemaining: effect.turnsRemaining - 1
       }));
-      // Execute effects with 0 turns remaining
+      // Collect effects that should trigger
       updated.filter(effect => effect.turnsRemaining === 0).forEach(effect => {
-        if (effect.action === 'return-to-battlefield') {
-          setOpponentBattlefield(prevBf => [...prevBf, { ...effect.card, instanceId: Date.now() }]);
-          setOpponentExile(prevExile => prevExile.filter(c => c.instanceId !== effect.card.instanceId));
-        }
+        triggeredEffects.push(effect);
       });
       // Return effects with turns remaining
       return updated.filter(effect => effect.turnsRemaining > 0);
+    });
+    // Execute triggered effects outside of state update
+    triggeredEffects.forEach(effect => {
+      if (effect.action === 'return-to-battlefield') {
+        setOpponentBattlefield(prevBf => [...prevBf, { ...effect.card, instanceId: Date.now() }]);
+        setOpponentExile(prevExile => prevExile.filter(c => c.instanceId !== effect.card.instanceId));
+      }
     });
     // Player draws a card at the beginning of their turn
     if (playerDeck.length > 0) {
