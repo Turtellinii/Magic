@@ -314,6 +314,7 @@ const GameBoard = ({ deck }) => {
     const defenderPower = defenderCard.power || 0;
     let playerCreatureDied = false;
     let opponentCreatureDied = false;
+    let playerVaranasiBonusGiven = false;
 
     if (isPlayerAttacking) {
       // Player is attacking opponent's creature
@@ -356,10 +357,13 @@ const GameBoard = ({ deck }) => {
           setPlayerGraveyard(prevGrave => [...prevGrave, ...deadAttackers]);
           playerCreatureDied = true;
           setPlayerCreatureDiedThisTurn(true);
-          // If player creature died and Varanasi is already tapped, give 1 mana
-          const varanasi = playerBattlefield.find(c => c.name === 'Varanasi, Eternal City' && c.tapped);
-          if (varanasi) {
-            setPlayerMana(prevMana => prevMana + 1);
+          // If player creature died and Varanasi is already tapped, give 1 mana (only once per combat)
+          if (!playerVaranasiBonusGiven) {
+            const varanasi = playerBattlefield.find(c => c.name === 'Varanasi, Eternal City' && c.tapped);
+            if (varanasi) {
+              setPlayerMana(prevMana => prevMana + 1);
+              playerVaranasiBonusGiven = true;
+            }
           }
         }
         return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
@@ -385,10 +389,13 @@ const GameBoard = ({ deck }) => {
           setPlayerGraveyard(prevGrave => [...prevGrave, ...deadDefenders]);
           playerCreatureDied = true;
           setPlayerCreatureDiedThisTurn(true);
-          // If player creature died and Varanasi is already tapped, give 1 mana
-          const varanasi = playerBattlefield.find(c => c.name === 'Varanasi, Eternal City' && c.tapped);
-          if (varanasi) {
-            setPlayerMana(prevMana => prevMana + 1);
+          // If player creature died and Varanasi is already tapped, give 1 mana (only once per combat)
+          if (!playerVaranasiBonusGiven) {
+            const varanasi = playerBattlefield.find(c => c.name === 'Varanasi, Eternal City' && c.tapped);
+            if (varanasi) {
+              setPlayerMana(prevMana => prevMana + 1);
+              playerVaranasiBonusGiven = true;
+            }
           }
         }
         return updated.filter(c => c.currentToughness === undefined || c.currentToughness > 0);
