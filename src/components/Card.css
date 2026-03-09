@@ -223,3 +223,45 @@
   top: 3px;
   left: 3px;
 }
+
+/* Kill button */
+.card-kill-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #c43a3a;
+  border: 2px solid #e74c3c;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  z-index: 10;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.card-kill-btn:hover {
+  background: #e74c3c;
+  transform: scale(1.15);
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.8);
+}
+
+.card-kill-btn:active {
+  transform: scale(0.95);
+}
+
+.card-small .card-kill-btn {
+  width: 16px;
+  height: 16px;
+  font-size: 11px;
+  top: 3px;
+  right: 3px;
+}

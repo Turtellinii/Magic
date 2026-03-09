@@ -1,13 +1,20 @@
 import React from 'react';
 import './Card.css';
 
-const Card = ({ card, onClick, onRightClick, onEffectClick, isSmall, isTapped, onBattlefield }) => {
+const Card = ({ card, onClick, onRightClick, onEffectClick, onKill, isSmall, isTapped, onBattlefield }) => {
   if (!card) return null;
 
   const handleEffectClick = (e, effectIndex) => {
     if (onBattlefield && onEffectClick) {
       e.stopPropagation();
       onEffectClick(effectIndex);
+    }
+  };
+
+  const handleKill = (e) => {
+    e.stopPropagation();
+    if (onKill) {
+      onKill();
     }
   };
 
@@ -85,6 +92,12 @@ const Card = ({ card, onClick, onRightClick, onEffectClick, isSmall, isTapped, o
         <div className={`card-stats ${card.currentToughness !== undefined && card.currentToughness < card.toughness ? 'card-stats-damaged' : ''}`}>
           {card.power}/{card.currentToughness !== undefined ? card.currentToughness : card.toughness}
         </div>
+      )}
+
+      {onBattlefield && onKill && (
+        <button className="card-kill-btn" onClick={handleKill} title="Send to graveyard">
+          ✕
+        </button>
       )}
     </div>
   );

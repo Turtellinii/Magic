@@ -923,6 +923,10 @@ const GameBoard = ({ deck }) => {
                 onBattlefield={true}
                 onClick={() => tapOpponentCard(card.instanceId)}
                 onEffectClick={(effectIndex) => handleOpponentEffectClick(card.instanceId, effectIndex)}
+                onKill={() => {
+                  const originalIndex = opponentBattlefield.findIndex(c => c.instanceId === card.instanceId);
+                  moveOpponentCardToGraveyard(originalIndex, 'battlefield');
+                }}
                 onRightClick={(e) => {
                   e.preventDefault();
                   if (window.confirm('Move to graveyard?')) {
@@ -951,6 +955,10 @@ const GameBoard = ({ deck }) => {
                 onBattlefield={true}
                 onClick={() => tapPlayerCard(card.instanceId)}
                 onEffectClick={(effectIndex) => handlePlayerEffectClick(card.instanceId, effectIndex)}
+                onKill={() => {
+                  const originalIndex = playerBattlefield.findIndex(c => c.instanceId === card.instanceId);
+                  movePlayerCardToGraveyard(originalIndex, 'battlefield');
+                }}
                 onRightClick={(e) => {
                   e.preventDefault();
                   if (window.confirm('Move to graveyard?')) {
