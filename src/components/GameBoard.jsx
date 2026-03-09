@@ -482,21 +482,17 @@ const GameBoard = ({ deck }) => {
     // Reset creature died flag
     setPlayerCreatureDiedThisTurn(false);
     // Process delayed effects
-    const triggeredEffects = [];
-    setPlayerDelayedEffects(prev => {
-      const updated = prev.map(effect => ({
-        ...effect,
-        turnsRemaining: effect.turnsRemaining - 1
-      }));
-      // Collect effects that should trigger
-      updated.filter(effect => effect.turnsRemaining === 0).forEach(effect => {
-        triggeredEffects.push(effect);
-      });
-      // Return effects with turns remaining
-      return updated.filter(effect => effect.turnsRemaining > 0);
-    });
-    // Execute triggered effects outside of state update
-    triggeredEffects.forEach(effect => {
+    const updatedEffects = playerDelayedEffects.map(effect => ({
+      ...effect,
+      turnsRemaining: effect.turnsRemaining - 1
+    }));
+    const effectsToTrigger = updatedEffects.filter(effect => effect.turnsRemaining === 0);
+
+    // Update delayed effects list (remove triggered effects)
+    setPlayerDelayedEffects(updatedEffects.filter(effect => effect.turnsRemaining > 0));
+
+    // Execute triggered effects
+    effectsToTrigger.forEach(effect => {
       if (effect.action === 'return-to-battlefield') {
         setPlayerBattlefield(prevBf => [...prevBf, { ...effect.card, instanceId: Date.now() }]);
         setPlayerExile(prevExile => prevExile.filter(c => c.instanceId !== effect.card.instanceId));
@@ -525,21 +521,17 @@ const GameBoard = ({ deck }) => {
     // Reset creature died flag
     setOpponentCreatureDiedThisTurn(false);
     // Process delayed effects
-    const triggeredEffects = [];
-    setOpponentDelayedEffects(prev => {
-      const updated = prev.map(effect => ({
-        ...effect,
-        turnsRemaining: effect.turnsRemaining - 1
-      }));
-      // Collect effects that should trigger
-      updated.filter(effect => effect.turnsRemaining === 0).forEach(effect => {
-        triggeredEffects.push(effect);
-      });
-      // Return effects with turns remaining
-      return updated.filter(effect => effect.turnsRemaining > 0);
-    });
-    // Execute triggered effects outside of state update
-    triggeredEffects.forEach(effect => {
+    const updatedEffects = opponentDelayedEffects.map(effect => ({
+      ...effect,
+      turnsRemaining: effect.turnsRemaining - 1
+    }));
+    const effectsToTrigger = updatedEffects.filter(effect => effect.turnsRemaining === 0);
+
+    // Update delayed effects list (remove triggered effects)
+    setOpponentDelayedEffects(updatedEffects.filter(effect => effect.turnsRemaining > 0));
+
+    // Execute triggered effects
+    effectsToTrigger.forEach(effect => {
       if (effect.action === 'return-to-battlefield') {
         setOpponentBattlefield(prevBf => [...prevBf, { ...effect.card, instanceId: Date.now() }]);
         setOpponentExile(prevExile => prevExile.filter(c => c.instanceId !== effect.card.instanceId));
