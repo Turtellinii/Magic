@@ -258,8 +258,12 @@ const GameBoard = ({ deck }) => {
     setPlayerBattlefield(playerBattlefield.map(c => {
       if (c.instanceId === cardInstanceId) {
         if (isLandCard(c)) {
-          // All lands give 1 mana when tapped
-          setPlayerMana(playerMana + 1);
+          // Varanasi, Eternal City: If a creature died this turn, add 2 mana instead of 1
+          if (c.name === 'Varanasi, Eternal City' && playerCreatureDiedThisTurn) {
+            setPlayerMana(playerMana + 2);
+          } else {
+            setPlayerMana(playerMana + 1);
+          }
         }
         return { ...c, tapped: true };
       }
@@ -289,8 +293,12 @@ const GameBoard = ({ deck }) => {
     setOpponentBattlefield(opponentBattlefield.map(c => {
       if (c.instanceId === cardInstanceId) {
         if (isLandCard(c)) {
-          // All lands give 1 mana when tapped
-          setOpponentMana(opponentMana + 1);
+          // Varanasi, Eternal City: If a creature died this turn, add 2 mana instead of 1
+          if (c.name === 'Varanasi, Eternal City' && opponentCreatureDiedThisTurn) {
+            setOpponentMana(opponentMana + 2);
+          } else {
+            setOpponentMana(opponentMana + 1);
+          }
         }
         return { ...c, tapped: true };
       }
